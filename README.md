@@ -18,10 +18,7 @@ History: Student profile will have a history with course informaiton from previo
 
 Current structure:
 Homepage for login ---> New User Account Creation
-|                        |
-|                        |
-V                        V
+
 Filter and Search for Courses --> Favorite (Schedule Planner) --> Cart (Schedule Enrollment) --> Checkout (Show enrollment)
-             ^                             |                               |
-             |____________________________ |______________________________ |
+  
 Logout option on any page.
