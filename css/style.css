@@ -171,6 +171,10 @@ textarea {
   width: 100%;
 }
 
+#createButton {
+  margin-top: 50px;
+}
+
 .forgot {
   margin-top: -20px;
   text-align: right;

@@ -26,7 +26,7 @@
         <div id="login">   
           <h1>Course Registration System</h1>
           
-          <form action="/" method="post">
+          <form id="loginForm" action="/" method="post">
           
             <div class="field-wrap">
             <label>
@@ -42,9 +42,7 @@
             <input type="password"required autocomplete="off"/>
           </div>
           
-          <p class="forgot"><a href="#">Forgot Password?</a></p>
-          
-          <button class="button button-block"/>Log In</button>
+          <button id="loginButton" class="button button-block"/>Log In</button>
           
           </form>
 
@@ -53,7 +51,7 @@
         <div id="signup">   
           <h1>Register Your Account</h1>
           
-          <form action="/" method="post">
+          <form id="signupForm" action="/" method="post">
           
           <div class="top-row">
             <div class="field-wrap">
@@ -77,26 +75,26 @@
               </label>
               <select id="account">
                 <option style="display:none"></option>
-                <option value="Admin">Admin</option>
-                <option value="Student">Student</option>
+                <option value="admin">Admin</option>
+                <option value="student">Student</option>
               </select>
           </div>
 
           <div class="field-wrap">
-            <label>
+            <label id="usernameLabel">
               Username<span class="req">*</span>
             </label>
             <input type="email"required autocomplete="off"/>
           </div>
           
           <div class="field-wrap">
-            <label>
+            <label id="passwordLabel">
               Password<span class="req">*</span>
             </label>
             <input type="password"required autocomplete="off"/>
           </div>
           
-          <button type="submit" class="button button-block"/>Create Account</button>
+          <button id="createButton" type="submit" class="button button-block"/>Create Account</button>
           
           </form>
 
