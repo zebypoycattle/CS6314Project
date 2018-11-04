@@ -55,7 +55,29 @@ $(document).ready(function() {
 
   $('.button').on('click', function(e) {
      var selector = $(this);
-     validate(e, selector);
+     if(!validate(e, selector)) {
+        e.preventDefault();
+     }
+  });
+
+  $('#usernameInput').on('change', function() {
+      $.ajax({
+       type: "GET",
+       url: "validateCredentials.php?username="+('#uesrnameInput').val(),
+       dataType: "json",
+       success: function(json) {
+          var success = JSON.stringify(json);
+          if(success.indexOf("true") >= 0) {
+            $('#usernameLabel').text("This is an available username.");
+          }
+          else {
+            $('#usernameLabel').text("Username already in use.");
+          }
+       },
+       error: function() {
+         alert("An error occurred while processing.");
+       }
+     });
   });
 
 
@@ -81,8 +103,7 @@ $(document).ready(function() {
   }
 
   function validate(event, selector) {
-    event.preventDefault();
-    
+    var validationComplete = false;
     var id = $(selector).attr("id");
     var passwordDiv = $(selector).prev();
     var userNameDiv = $(passwordDiv).prev();
@@ -97,12 +118,14 @@ $(document).ready(function() {
 
         if(!validateRequiredFieldsAreNonEmpty(event, divArray)) {
           alert("Please fill all required fields.");
+          return validationComplete;
         }
         else {
           var validatedUsername = validateUsername(event, userNameDiv);
           var validatedPassword = validatePassword(event, passwordDiv);
           if (!validatedUsername || !validatedPassword) {
             alert("Invalid username or password.");
+            return validationComplete;
           }
         }
         
@@ -112,8 +135,20 @@ $(document).ready(function() {
       divArray = [userNameDiv, passwordDiv]
       if(!validateRequiredFieldsAreNonEmpty(event, divArray)) {
         alert("Please fill all required fields.");
+        return validationComplete;
+      }
+      else {
+        var username = $(userNameDiv).find('select').val();
+        var password = $(passwordDiv).find('select').val(); 
+        if(!checkUsernameAndPasswordExist(username, password)) {
+          alert("Invalid username and password combination.");
+          return validationComplete;
+        }
       }
     }
+
+    validationComplete = true;
+    return validationComplete;
   }
 
   function validateRequiredFieldsAreNonEmpty(event, divArray) {
@@ -142,6 +177,7 @@ $(document).ready(function() {
     return allFieldsAreNonEmpty;
     
   }
+
 
   function validateUsername(event, selector) {
       var validUsername = true;

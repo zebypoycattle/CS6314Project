@@ -25,20 +25,20 @@
           <div id="login">   
             <h1>Course Registration System</h1>
             
-            <form id="loginForm">
+            <form id="loginForm" method="POST" action="login.php">
             
               <div class="field-wrap">
                 <label>
                   Username<span class="req">*</span>
                 </label>
-                <input type="text" autocomplete="off"/>
+                <input type="text" name="username" autocomplete="off"/>
               </div>
             
               <div class="field-wrap">
                 <label>
                   Password<span class="req">*</span>
                 </label>
-                <input type="password" autocomplete="off"/>
+                <input type="password" name="password" autocomplete="off"/>
               </div>
             
               <button id="loginButton" class="button button-block"/>Log In</button>
@@ -50,13 +50,13 @@
           <div id="signup">   
             <h1>Register Your Account</h1>
             
-            <form id="signupForm">
+            <form id="signupForm" method="POST" action="signup.php">
 
               <div class="field-wrap">
                 <label id="accountText">
                   Account Type<span class="req">*</span>
                 </label>
-                <select id="account" required>
+                <select id="account" name="account" required>
                   <option style="display:none"></option>
                   <option value="admin">Admin</option>
                   <option value="student">Student</option>
@@ -68,14 +68,14 @@
                   <label>
                     First Name<span class="req">*</span>
                   </label>
-                  <input type="text" autocomplete="off" />
+                  <input type="text" name="firstName" autocomplete="off" />
                 </div>
             
                 <div class="field-wrap" id= "lastNameDiv">
                   <label>
                     Last Name<span class="req">*</span>
                   </label>
-                  <input type="text" autocomplete="off"/>
+                  <input type="text" name="lastName" autocomplete="off"/>
                 </div>
               </div>
 
@@ -83,14 +83,14 @@
                 <label id="usernameLabel">
                   Username<span class="req">*</span>
                 </label>
-                <input type="text" autocomplete="off"/>
+                <input type="text" id="usernameInput" name="username" autocomplete="off"/>
               </div>
               
               <div class="field-wrap">
                 <label id="passwordLabel">
                   Password<span class="req">*</span>
                 </label>
-                <input type="password" autocomplete="off"/>
+                <input type="password" name="password" autocomplete="off"/>
               </div>
               
               <button id="createButton" type="submit" class="button button-block"/>Create Account</button>
