@@ -17,8 +17,9 @@ Checkout: After enrolling, course schedule for student will appear. If any cours
 History: Student profile will have a history with course informaiton from previous semesters.
 
 Current structure:
-Homepage for login ---> New User Account Creation
+Homepage for Login and New User Account Creation (home.html, login.php, signup.php, home.js, style.css)
 
-Filter and Search for Courses --> Favorite (Schedule Planner) --> Cart (Schedule Enrollment) --> Checkout (Show enrollment)
+Home Page with Tabs for Following (welcome.html, navbar.css, style.css)
+Course History --> Filter and Search for Courses --> Favorite (Schedule Planner) --> Cart (Schedule Enrollment) --> Checkout (Show enrollment)
   
-Logout option on any page.
+Logout option on any page (logout.php)
