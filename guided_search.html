@@ -8,6 +8,8 @@
 
   function showData ()
   {
+
+
     if (window.XMLHttpRequest)
     {
           // code for IE7+, Firefox, Chrome, Opera, Safari
@@ -22,18 +24,49 @@
     {
         if (this.readyState == 4 && this.status == 200)
         {
-            document.getElementById("results").innerHTML = this.responseText;
+            document.getElementById("class_results").innerHTML = this.responseText;
         }
     };
 
     var name = document.getElementById("name_select").value;
-    var number = document.getElementById("number_select").value;
+    var section = document.getElementById("section_select").value;
     var level = document.getElementById("level_select").value;
     var location = document.getElementById("location_select").value;
-    var http = "guided_search.php?name=" + name +"&number="+number+"&level="+level+"&location="+location;
+    var http = "guided_search.php?name=" + name +"&section="+section+"&level="+level+"&location="+location;
 
     xmlhttp.open("GET",http,true);
     xmlhttp.send();
+  }
+
+  function add_to_favorites(CID)
+  {
+
+    if (window.XMLHttpRequest)
+    {
+          // code for IE7+, Firefox, Chrome, Opera, Safari
+        xmlhttp = new XMLHttpRequest();
+    }
+    else
+    {
+          // code for IE6, IE5
+          xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xmlhttp.onreadystatechange = function()
+    {
+        if (this.readyState == 4 && this.status == 200)
+        {
+          var test = this.responseText;
+          alert(test);
+
+        }
+    };
+
+    var http = "add_to_favorites.php?CID="+CID;
+
+    xmlhttp.open("GET",http,true);
+    xmlhttp.send();
+
+
   }
 
 </script>
@@ -58,7 +91,7 @@
       </div>
   </div>
 
-  <br>
+  <br><br>
   <h1> Guided Search </h1>
   <br>
 
@@ -67,8 +100,8 @@
     <label for="class_name">Class Name: </label>
     <input type = "text" id = "name_select"><br>
 
-    <label for="class_number">Class Number: </label>
-    <input type = "text" id = "number_select"><br>
+    <label for="class_section">Class Section: </label>
+    <input type = "text" id = "section_select"><br>
 
     <label for="class_level">Class Level: </label>
     <select id = "level_select">
@@ -90,7 +123,10 @@
 
   <br>
 
-  <div id = "results">
+  <div id = "class_results">
+  </div>
+
+  <div id = "add_results">
   </div>
 
 </body>
