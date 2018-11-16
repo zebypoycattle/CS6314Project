@@ -1,5 +1,4 @@
-h1
-{
+h1 {
   text-align: center;
 }
 
@@ -38,18 +37,7 @@ h1
 
 }
 
-
-/*
-
-table {
-    width: 100%;
-    border-collapse: collapse;
+#class_results
+{
+  text-align: center;
 }
-
-table, td, th {
-    border: 1px solid black;
-    padding: 5px;
-}
-
-th {text-align: left;}
-*/
