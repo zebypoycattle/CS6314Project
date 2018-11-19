@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 $user = 'root';
 $password = 'root';
-$db = 'hw3';
+$db = 'course_registration';
 $host = 'localhost';
 $port = 3306;
 
@@ -22,24 +22,29 @@ $conn = mysqli_connect(
    $port
 );
 
-  if (!$conn) {
-    echo "Connection failed!";
-    exit;
-  }
+if (!$conn) {
+  echo "Connection failed!";
+  exit;
+}  
 
 
+  $sql = "SELECT u.Username, u.Category, u.Pwd, s.SID FROM user AS u INNER JOIN user_student AS s ON u.Username = s.Username WHERE u.Username = '$username'";
+  $record = mysqli_fetch_array(mysqli_query($conn, $sql));
 
-  $sql = "SELECT * FROM users WHERE username = '$username' AND password = '$password'";
-  $result = mysqli_query($conn, $sql);
-  mysqli_close();
 
-  if(mysqli_num_rows($result) != 1) {
+  if(password_verify($pwd, $record["Pwd"])) {
     session_start();
-	$_SESSION['username'] = $username;
-	header("Location: welcome.html");
+	  $_SESSION['username'] = $username;
+    $_SESSION['account'] = $record["Category"];
+    $_SESSION['SID'] = $record["SID"];
+	  header("Location: home.php");
   }
-  else{
-    header("Location: home.html");
+  else {
+    $message = "Invalid Username or Password";
+    echo "<SCRIPT type='text/javascript'>
+        alert('$message');
+        window.location.replace(\"root.html\");
+    </SCRIPT>";
   }
 
 

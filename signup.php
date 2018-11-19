@@ -1,18 +1,70 @@
 <?php
  // define variables and set to empty values
-$username = $password = $account = $firstName = $lastName = "";
+$username = $pwd = $category = $account = $firstName = $lastName = $studentID = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = test_input($_POST["username"]);
-  $password = test_input($_POST["password"]);
+  $pwd = test_input($_POST["password"]);
   $account = test_input($_POST["account"]);
   $firstName = test_input($_POST["firstName"]);
   $lastName = test_input($_POST["lastName"]);
 }
 
+$user = 'root';
+$password = 'root';
+$db = 'course_registration';
+$host = 'localhost';
+$port = 3306;
+
+$conn = mysqli_init();
+$conn = mysqli_connect(
+   $host,
+   $user,
+   $password,
+   $db,
+   $port
+);
+
+if (!$conn) {
+  echo "Connection failed!";
+  exit;
+}
+
+
+if($account !== "admin") {
+	$category = "student";
+	$largestStudentID = "SELECT SID FROM user_student ORDER BY SID DESC LIMIT 1";
+	$sql = mysqli_query($conn, $largestStudentID);
+	$row = mysqli_fetch_array($sql);
+	$studentID = (int) $row["SID"] + 1;
+
+	$registerUserStudent = "INSERT INTO user_student(Username, SID) VALUES ('$username', '$studentID')";
+	mysqli_query($conn, $registerUserStudent);
+
+}
+else {
+	$category = $account;
+}
+
+
+$hash = password_hash($pwd, PASSWORD_DEFAULT);
+$registerAccount = "INSERT INTO user(Username, Category, Pwd) VALUES ('$username', '$category', '$hash')";
+mysqli_query($conn, $registerAccount);
+
+mysqli_close();
+
 session_start();
 $_SESSION['username'] = $username;
-header("Location: welcome.html");
+$_SESSION['account'] = $category;
+$_SESSION['SID'] = $studentID;
+
+header("Location: home.php");
+
+
+
+
+
+
 
  //clean input
 function test_input($data) {
