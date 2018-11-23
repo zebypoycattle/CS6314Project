@@ -49,8 +49,8 @@ $(document).ready(function() {
     
   });
 
-  $('#account').on('click', function (e) {
-    $('#accountText').addClass('active highlight');
+  $('.formDropDown').on('click', function (e) {
+    $(this).prev().addClass('active highlight');
   });
 
   $('.button').on('click', function(e) {
@@ -61,33 +61,32 @@ $(document).ready(function() {
   });
 
   $('#usernameInput').on('change', function() {
-      $.ajax({
-       type: "GET",
-       url: "validateCredentials.php?username="+('#uesrnameInput').val(),
-       dataType: "json",
-       success: function(json) {
-          var success = JSON.stringify(json);
-          if(success.indexOf("true") >= 0) {
-            $('#usernameLabel').text("This is an available username.");
-          }
-          else {
-            $('#usernameLabel').text("Username already in use.");
-          }
-       },
-       error: function() {
-         alert("An error occurred while processing.");
-       }
-     });
+    checkAvailability();
+    if($("#usernameInput").val().length < 5 || $("#usernameInput").val().length > 10) {
+      $("#usernameLabel").text("Username must be alphanumeric between 6 and 10 characters.");
+    }
   });
+
+  function checkAvailability() {
+    jQuery.ajax({
+    url: "check_availability.php",
+    data:'username='+$("#usernameInput").val(),
+    type: "POST",
+    success:function(data){
+      $("#usernameLabel").html(data);
+    },
+    error:function (){}
+    });
+}
 
 
   function credentialRequirements(selector) {
         var id = $(selector).attr("id");
         if(id === "usernameLabel") {
-          $(selector).text("Username must be alphanumeric between 6 and 15 characters.");
+          $(selector).text("Username must be lowercase alphanumeric between 6 and 10 characters.");
         }
         else if(id === "passwordLabel") {
-          $(selector).text("Password must be at least 7 characters and contain upper and lower case letter, number, and special character.");
+          $(selector).text("Password must be at least 8 characters and contain upper and lower case letter and number.");
         }
          
   }
@@ -107,29 +106,38 @@ $(document).ready(function() {
     var id = $(selector).attr("id");
     var passwordDiv = $(selector).prev();
     var userNameDiv = $(passwordDiv).prev();
+
+    var userNameInput = $(userNameDiv).find('input').val();
+    var userLabel = $("#usernameLabel").text();
+    var passwordInput = $(passwordDiv).find('input').val();
     var divArray;
 
     if(id === "createButton") {
         var nameDiv = $(userNameDiv).prev();
         var firstNameDiv = $(nameDiv).find("#firstNameDiv");
         var lastNameDiv = $(nameDiv).find("#lastNameDiv");
-        var accountDiv = $(nameDiv).prev();
-        divArray = [accountDiv, firstNameDiv, lastNameDiv, userNameDiv, passwordDiv];
+        var infoDiv = $(nameDiv).prev();
+        var accountDiv = $(infoDiv).find("#accountDiv");
+        var emailDiv = $(infoDiv).find("#emailDiv");
+        var emailInput = $(emailDiv).find('input').val();
+        divArray = [accountDiv, emailDiv, firstNameDiv, lastNameDiv, userNameDiv, passwordDiv];
 
         if(!validateRequiredFieldsAreNonEmpty(event, divArray)) {
           alert("Please fill all required fields.");
           return validationComplete;
         }
         else {
-          var validatedUsername = validateUsername(event, userNameDiv);
-          var validatedPassword = validatePassword(event, passwordDiv);
-          if (!validatedUsername || !validatedPassword) {
-            alert("Invalid username or password.");
+          var validatedUsername = validateUsername(event, userNameInput, userLabel);
+          console.log(validatedUsername);
+          var validatedPassword = validatePassword(event, passwordInput);
+          console.log(validatedPassword);
+          var validatedEmail = validateEmail(event, emailInput);
+          console.log(validatedEmail);
+          if (!validatedUsername || !validatedPassword || !validatedEmail) {
+            alert("Invalid username, password, and/or e-mail address.");
             return validationComplete;
           }
         }
-        
-      
     }
     else {
       divArray = [userNameDiv, passwordDiv]
@@ -138,10 +146,10 @@ $(document).ready(function() {
         return validationComplete;
       }
       else {
-        var username = $(userNameDiv).find('select').val();
-        var password = $(passwordDiv).find('select').val(); 
-        if(!checkUsernameAndPasswordExist(username, password)) {
-          alert("Invalid username and password combination.");
+        var validatedUsername = validateUsername(event, userNameInput, userLabel);
+        var validatedPassword = validatePassword(event, passwordInput);
+        if (!validatedUsername || !validatedPassword) {
+          alert("Invalid username or password.");
           return validationComplete;
         }
       }
@@ -150,6 +158,7 @@ $(document).ready(function() {
     validationComplete = true;
     return validationComplete;
   }
+
 
   function validateRequiredFieldsAreNonEmpty(event, divArray) {
     var allFieldsAreNonEmpty = true;
@@ -179,50 +188,93 @@ $(document).ready(function() {
   }
 
 
-  function validateUsername(event, selector) {
+  function validateUsername(event, usernameInput, userLabel) {
       var validUsername = true;
-      var usernameInput = $(selector).find('input').val();
-      if(usernameInput.length < 5) {
-        validUsername = false;
-        $(selector).find('input').focus().val("");
-      }
-      else if(!isAlphaNumeric(usernameInput)) {
-        validUsername = false;
-        $(selector).find('input').focus().val("");
-      }
+      console.log(userLabel);
 
+      if(userLabel === "Username is not available, select a new username.") {
+        validUsername = false;
+        $(".credentialInput").focus().val("").focus(); 
+      }
+      else if(usernameInput.length < 6 || usernameInput.length > 10) {
+        validUsername = false;
+        $(".credentialInput").focus().val("").focus();
+      }
+      else if(!isUpperLowerAlphaNumeric(usernameInput)) {
+        validUsername = false;
+        $(".credentialInput").focus().val("").focus();
+      }
       return validUsername;
       
+  }
+
+  function validatePassword(event, passwordInput) {
+    var validPassword = true;
+
+    if(!isUpperLowerAlphaNumeric(passwordInput)) {
+      validPassword = false;
+      $(".credentialInput").focus().val("").focus();
     }
 
-    function validatePassword(event, selector) {
-      var validPassword = true;
-      var passwordInput = $(selector).find('input').val();
-      if(passwordInput.length < 5) {
-        validPassword = false;
-        $(selector).find('input').focus().val("");
-      }
-      else if(!isAlphaNumeric(passwordInput)) {
-        validPassword = false;
-        $(selector).find('input').focus().val("");
-      }
+    return validPassword;
+  }
 
-      return validPassword;
+  function validateEmail(event, emailAddress) {
+    var validEmail = true;
+    console.log(emailAddress);
+
+    if(!emailAddress.includes("@")) {
+      validEmail = false;
+      $(".credentialInput").focus().val("").focus();
+    }
+    else {
+      var emailAccount = emailAddress.substring(0, emailAddress.indexOf("@"));
+      var emailDomain = emailAddress.substring(emailAddress.indexOf("@")+1, emailAddress.length-4);
+      var emailHost = emailAddress.substring(emailAddress.length-4);
+      console.log(emailAccount);
+      console.log(emailDomain);
+      console.log(emailHost);
+
+      if(!isAlphaNumeric(emailAccount)) {
+        validEmail = false;
+        $(".credentialInput").focus().val("").focus();
+      }
+      else if(!isAlphaNumeric(emailDomain)) {
+        validEmail = false;
+        $(".credentialInput").focus().val("").focus();
+      }
+      else if(emailHost.charAt(0) !== "." || !isLowerAlpha(emailHost.substring(1))) {
+        validEmail = false;
+        $(".credentialInput").focus().val("").focus();
+      }
     }
 
+    return validEmail;
+  }
 
-  function isAlpha(inputtxt) {
-      var letter = /^[a-zA-Z]+$/;
+
+  function isAlphaNumeric(inputtxt) {
+      var letter = /^[a-zA-Z0-9]+$/;
       if(inputtxt.match(letter)) {
         return true;
        }
        else {
         return false;
       }
-    }
+  }
 
-    function isAlphaNumeric(inputtxt)  {
-       var letterNumber = /^[0-9a-zA-Z]+$/;
+   function isLowerAlpha(inputtxt) {
+      var letter = /^[a-z]+$/;
+      if(inputtxt.match(letter)) {
+        return true;
+       }
+       else {
+        return false;
+      }
+  }
+
+    function isUpperLowerAlphaNumeric(inputtxt)  {
+       var letterNumber = /(?=^.{8,}$)(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?!.*\s)[0-9a-zA-Z!@#$%^&*()]*$/;
        if(inputtxt.match(letterNumber)) {
          return true;
         }
