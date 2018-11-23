@@ -1,13 +1,18 @@
 <?php
- if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == '')) {
-    header("location: root.html");
-    exit();
-  }
-  else {
-    session_start();
-    $username = $_SESSION['username'];  
-  }
-echo "<br>";
+session_start();
+
+if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == ''))
+{
+  header("location: root.html");
+  exit();
+}
+else
+{
+  $username = $_SESSION['username'];
+  $accountType = $_SESSION['account'];
+  $SID = $_SESSION['SID'];
+}
+
 ?>
 
 <html lang="en">
@@ -20,7 +25,7 @@ echo "<br>";
 <?php
 
 $name = $_GET['name'];
-$section = $_GET['number'];
+$section = $_GET['section'];
 $level = $_GET['level'];
 $location = $_GET['location'];
 
@@ -44,6 +49,7 @@ if (!$conn){
 	exit;
 }
 
+
 $sql = "SELECT * FROM course c
         INNER JOIN course_professor cp ON c.CID = cp.CID
         INNER JOIN professor p ON p.PID = cp.PID
@@ -51,7 +57,7 @@ $sql = "SELECT * FROM course c
 
 if($name != "")
 {
-  $sql .= "Cname like '%" . $name . "%' AND ";
+  $sql .= "Cname like '%$name%' AND ";
 }
 else
 {
@@ -60,7 +66,7 @@ else
 
 if($section != "")
 {
-  $sql .= "Section like '%" . $section . "%' AND ";
+  $sql .= "Section like '%$section%' AND ";
 }
 else
 {
@@ -69,7 +75,7 @@ else
 
 if($level != "any")
 {
-  $sql .= "level = '" . $level . "' AND ";
+  $sql .= "level = '$level' AND ";
 }
 else
 {
@@ -82,7 +88,7 @@ if($location == "any")
 }
 else if($location == 'online')
 {
-  $sql .= "Location = '" . $location . "'";
+  $sql .= "Location = '$location'";
 }
 else
 {
@@ -93,11 +99,24 @@ $sql .= " order by section asc";
 
 $result = mysqli_query($conn, $sql);
 
-echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Time</td><td>Location</td><td>Fill</td><td>Add To Favorites</td></tr>";
+
+if($accountType == 'student')
+{
+  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td></tr>";
+}
+else
+{
+  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
+}
 
 while($row = mysqli_fetch_array($result))
 {
+  $CID = $row["CID"];
+
 	echo "<tr><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Schedule"]. "</td><td>". $row["Location"]. "</td>";
+
+  echo "<td><a href = 'image$CID.html'><img style = 'width: 50px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
+
   if($row["OpenSeats"]==0)
   {
     echo "<td>FULL</td>";
@@ -107,8 +126,20 @@ while($row = mysqli_fetch_array($result))
     echo "<td>OPEN</td>";
   }
 
-  echo "<td> <button onclick='add_to_favorites(" . $row["CID"] . ")'>Add</button> </td></tr>";
 
+
+
+  if($accountType == 'student')
+  {
+    echo "<td> <button onclick='add_to_favorites($CID)'>Add</button> </td></tr>";
+  }
+  else
+  {
+
+    echo "<td> <form action='edit_course.php?CID=$CID' method='post'><input type='submit' value='Edit'></form></td>";
+    echo "<td> <button onclick='delete_course($CID)'>Delete</button> </td>";
+    echo "</tr>";
+  }
 
 }
 

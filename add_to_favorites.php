@@ -1,9 +1,17 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == ''))
+{
+  header("location: root.html");
+  exit();
+}
 //Get parameters
 $username = $_SESSION["username"];
+$account_type = $_SESSION['account'];
+$SID = $_SESSION['SID'];
 $CID = $_GET["CID"];
+
 
 $user = 'root';
 $password = 'root';
@@ -23,16 +31,6 @@ if (!$conn){
 
 	echo "Connection failed!";
 	exit;
-}
-
-//Get SID from username
-$sql = "SELECT * FROM user_student WHERE Username = '" . $username . "'";
-
-$result = mysqli_query($conn, $sql);
-
-while($row = mysqli_fetch_array($result))
-{
-  $SID = $row["SID"];
 }
 
 //Get favorites records with this SID
