@@ -22,7 +22,7 @@ if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == '')) {
 		<div class="topnav">
   			<a class="active" href="home.html">Home</a>
         <a href="history.php">History</a>
-  			<a href="guided_search.html">Guided Search</a>
+  			<a href="courses_page.php">Courses</a>
   			<a href="favorites.php">Favorites</a>
   			<a href="cart.php">Enroll</a>
   			<div class="topnav-right">
