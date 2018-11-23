@@ -107,7 +107,8 @@
 
 	<meta charset="utf-8">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/guided_search.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/class_search.css">
   <link rel="stylesheet" href="css/navbar.css">
 	<title>Courses</title>
 </head>

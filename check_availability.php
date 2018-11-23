@@ -32,7 +32,7 @@ if( $username === '') {
   $user_count = mysqli_num_rows($result);
 
   if($user_count>0) {
-      echo "Username not available, select a new username.";
+      echo "Username is not available, select a new username.";
   }
   else{
       echo "Username is available.";

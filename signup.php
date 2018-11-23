@@ -1,6 +1,6 @@
 <?php
  // define variables and set to empty values
-$username = $pwd = $category = $account = $firstName = $lastName = $studentID = "";
+$username = $pwd = $category = $account = $email = $firstName = $lastName = $studentID = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = test_input($_POST["username"]);
@@ -8,6 +8,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $account = test_input($_POST["account"]);
   $firstName = test_input($_POST["firstName"]);
   $lastName = test_input($_POST["lastName"]);
+  $email = test_input($_POST["email"]);
 }
 
 $user = 'root';
@@ -41,6 +42,9 @@ if($account !== "admin") {
 	$registerUserStudent = "INSERT INTO user_student(Username, SID) VALUES ('$username', '$studentID')";
 	mysqli_query($conn, $registerUserStudent);
 
+  $registerStudent = "INSERT INTO student(SID, FName, LName, Email, Degree) VALUES ('$studentID', '$firstName', '$lastName', $email, $account)";
+  mysqli_query($conn, $registerStudent);
+
 }
 else {
 	$category = $account;
@@ -59,10 +63,6 @@ $_SESSION['account'] = $category;
 $_SESSION['SID'] = $studentID;
 
 header("Location: home.php");
-
-
-
-
 
 
 

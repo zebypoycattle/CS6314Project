@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script  src="js/home.js"></script>
     <script type="text/javascript">
 
     function addClass ()
@@ -87,7 +88,7 @@
                     <label id="termText">
                       Term<span class="req">*</span>
                     </label>
-                    <select id="classTerm" name="term" required>
+                    <select id="classTerm" class="formDropDown" name="term" required>
                       <option style="display:none"></option>
                       <option value="19Spring">19Spring</option>
                       <option value="19Summer">19Summer</option>
@@ -116,7 +117,7 @@
                       <label id="daysText">
                         Days<span class="req">*</span>
                       </label>
-                      <select id="days" name="days" required>
+                      <select id="days" name="days" class="formDropDown" required>
                         <option style="display:none"></option>
                         <option value="M/W">M/W</option>
                         <option value="T/Th">T/Th</option>
@@ -127,7 +128,7 @@
                       <label id="timeText">
                         Time<span class="req">*</span>
                       </label>
-                      <select id="time" name="time" required>
+                      <select id="time" name="time" class="formDropDown" required>
                         <option style="display:none"></option>
                         <option value="8:30am-9:45am">8:30am-9:45am</option>
                         <option value="10:00am-11:15am">10:00am-11:15am</option>
@@ -143,14 +144,18 @@
                     <label id="locationLabel">
                       Class Location<span class="req">*</span>
                     </label>
-                    <input type="text" id="classLocation" name="classLocation" autocomplete="off"/>
+                    <select id="classLocation" name="classLocation" class="formDropDown" required>
+                      <option style="display:none"></option>
+                      <option value="Online">Online</option>
+                      <option value="On Campus">On Campus</option>
+                    </select>
                   </div>
 
                   <div class="field-wrap">
                     <label id="levelText">
                       Level<span class="req">*</span>
                     </label>
-                    <select id="classLevel" name="level" required>
+                    <select id="classLevel" name="level" class="formDropDown" required>
                       <option style="display:none"></option>
                       <option value="Undergraduate">Undergraduate</option>
                       <option value="Graduate">Graduate</option>

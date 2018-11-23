@@ -28,7 +28,7 @@ if (!$conn) {
 }  
 
 
-  $sql = "SELECT u.Username, u.Category, u.Pwd, s.SID FROM user AS u INNER JOIN user_student AS s ON u.Username = s.Username WHERE u.Username = '$username'";
+  $sql = "SELECT u.Username, u.Category, u.Pwd, s.SID FROM user AS u LEFT OUTER JOIN user_student AS s ON u.Username = s.Username WHERE u.Username = '$username'";
   $record = mysqli_fetch_array(mysqli_query($conn, $sql));
 
 
@@ -40,11 +40,11 @@ if (!$conn) {
 	  header("Location: home.php");
   }
   else {
-    $message = "Invalid Username or Password";
+    $message = "Invalid username/password combination.";
     echo "<SCRIPT type='text/javascript'>
         alert('$message');
         window.location.replace(\"root.html\");
-    </SCRIPT>";
+    </SCRIPT>";    
   }
 
 

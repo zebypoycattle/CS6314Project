@@ -9,16 +9,16 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
-  <div class="topnav">
-      <a class="active" href="home.php">Home</a>
-      <a href="history.php">History</a>
-      <a href="guided_search.html">Guided Search</a>
-      <a href="favorites.php">Favorites</a>
-      <a href="cart.php">Enroll</a>
-      <div class="topnav-right">
-        <a href="logout.php">Logout</a>
-      </div>
-  </div>
+    <div class="topnav">
+        <a class="active" href="home.html">Home</a>
+        <a href="history.php">History</a>
+        <a href="courses_page.php">Courses</a>
+        <a href="favorites.php">Favorites</a>
+        <a href="cart.php">Enroll</a>
+        <div class="topnav-right">
+          <a href="logout.php">Logout</a>
+        </div>
+    </div>
   <div>
     <h1>Previous Coursework</h1>
   <?php
