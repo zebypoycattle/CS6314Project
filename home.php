@@ -1,9 +1,9 @@
 <?php
 session_start();
-if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == '')) {
-  header("location: root.html");
-  exit();
-}
+
+ $username = $_SESSION['username'];
+ $accountType = $_SESSION['account'];
+ $SID = $_SESSION['SID'];
 ?>
 <html>
 	<html lang="en">
@@ -20,7 +20,7 @@ if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == '')) {
 	</head>
 	<body>
 		<div class="topnav">
-  			<a class="active" href="home.html">Home</a>
+  			<a class="active" href="home.php">Home</a>
         <a href="history.php">History</a>
   			<a href="courses_page.php">Courses</a>
   			<a href="favorites.php">Favorites</a>
@@ -29,8 +29,22 @@ if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == '')) {
     			<a href="logout.php">Logout</a>
   			</div>
 		</div>
-      <h1> Welcome to Course Registration </h1>
-    <div>
-    </div>
+      <?php
+        echo "<br><br><h1> Welcome to Course Registration, $username!</h1>";
+      ?>
+      <ul>
+        <?php
+
+          if($accountType!= 'student')
+          {
+            echo  "<li><a href='create_course.html'>Add New Courses or Accounts</a></li>";
+          }
+
+        ?>
+        <li>Click on the History tab to see your previous coursework.</li>
+        <li>Click on the Courses tab to search for courses.</li>
+        <li>Click on the Favorites tab to see your favorited courses.</li>
+        <li>Click on the Enroll tab to arrange your cart and enroll in your courses.</li>
+      </ul>
 	</body>
 </html>

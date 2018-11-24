@@ -8,7 +8,6 @@
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script  src="js/home.js"></script>
     <script type="text/javascript">
 
     function addClass ()
@@ -56,16 +55,20 @@
 
 
     </script>
-
+    <script  src="js/home.js"></script>
   </head>
-
     <body>
 
-        <div class="form">
+    <div class="form">
+        
+        <ul class="tab-group">
+          <li class="tab active"><a href="#addCourse">Add Course</a></li>
+          <li class="tab "><a href="#signup">Sign Up</a></li>
+        </ul>
+        
+        <div class="tab-content">
 
-            <div class="tab-content">
-
-
+          <div id="addCourse">
                 <h1>Create New Course</h1>
 
                 <form id="addForm" method="POST">
@@ -179,12 +182,74 @@
                     <button id = "createClassButton" class="button button-block" value="Add Class" onclick = "addClass()"/>Add Class</button>
 
                 </form>
+                </div>
+          
 
+          <div id="signup">   
+            <h1>Register Your Account</h1>
+            
+            <form id="signupForm" method="POST" action="signup.php">
+
+              <div class="top-row">
+                <div class="field-wrap" id= "accountDiv">
+                  <label id="accountText">
+                    Account Type<span class="req">*</span>
+                  </label>
+                  <select id="account" name="account" class="formDropDown" required>
+                    <option></option>
+                    <option value="admin">Admin</option>
+                    <option value="undergraduate">Undergraduate</option>
+                    <option value="graduate">Graduate</option>
+                  </select>
+                </div>
+                <div class="field-wrap" id= "emailDiv">
+                  <label id="emailLabel">
+                    E-mail Address<span class="req">*</span>
+                  </label>
+                  <input class="credentialInput" type="text" name="email" autocomplete="off" />
+                </div>
+              </div>
+            
+              <div class="top-row">
+                <div class="field-wrap" id= "firstNameDiv">
+                  <label>
+                    First Name<span class="req">*</span>
+                  </label>
+                  <input type="text" name="firstName" autocomplete="off" />
+                </div>
+            
+                <div class="field-wrap" id= "lastNameDiv">
+                  <label>
+                    Last Name<span class="req">*</span>
+                  </label>
+                  <input type="text" name="lastName" autocomplete="off"/>
+                </div>
               </div>
 
-          </div><!-- tab-content -->
+              <div class="field-wrap">
+                <label id="usernameLabel">
+                  Username<span class="req">*</span>
+                </label>
+                <input type="text" class="credentialInput" id="usernameInput" name="username" autocomplete="off"/>
+              </div>
+              
+              <div class="field-wrap">
+                <label id="passwordLabel">
+                  Password<span class="req">*</span>
+                </label>
+                <input class="credentialInput" type="password" name="password" autocomplete="off"/>
+              </div>
+              
+              <button id="createButton" type="submit" class="button button-block"/>Create Account</button>
+            
+            </form>
 
+          </div>
+          
+        </div><!-- tab-content -->
+        
+    </div> <!-- /form -->
 
-      </body>
+  </body>
 
 </html>

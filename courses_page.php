@@ -106,7 +106,9 @@
 </script>
 
 	<meta charset="utf-8">
+  <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/class_search.css">
   <link rel="stylesheet" href="css/navbar.css">
@@ -116,7 +118,7 @@
 <body>
 
   <div class="topnav">
-      <a class="active" href="#home">Home</a>
+      <a class="active" href="home.php">Home</a>
       <a href="history.php">History</a>
       <a href="courses_page.php">Courses</a>
       <a href="favorites.php">Favorites</a>
@@ -128,23 +130,6 @@
 
   <br><br>
   <h1> Guided Search </h1>
-
-  <?php
-    session_start();
-    $username = $_SESSION['username'];
-    $accountType = $_SESSION['account'];
-    $SID = $_SESSION['SID'];
-
-    if($accountType!= 'student')
-    {
-
-      echo "<br>";
-      echo  "<form action='create_course.html'><input style = 'margin-left: 40%; margin-right: 40%; width: 20%;' id = 'add_course_button' type='submit' value='Add New Class'></form>";
-    }
-
-  ?>
-
-
 
   <br>
 

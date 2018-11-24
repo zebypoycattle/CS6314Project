@@ -62,6 +62,12 @@ $_SESSION['username'] = $username;
 $_SESSION['account'] = $category;
 $_SESSION['SID'] = $studentID;
 
+
+$message = "New account created.";
+echo "<SCRIPT type='text/javascript'>
+    alert('$message');
+    window.location.replace(\"home.php\");
+</SCRIPT>"; 
 header("Location: home.php");
 
 
