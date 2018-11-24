@@ -33,35 +33,35 @@ if (!$conn){
 	exit;
 }
 
-//Get cart records with this SID and this CID
-$sql = "SELECT * FROM Cart WHERE SID=" . $SID . " AND CID=" . $CID;
+//Get enrollment records with this SID
+$sql = "SELECT * FROM Student_Course WHERE SID=" . $SID . " AND CID=" . $CID;
 $result = mysqli_query($conn, $sql);
 $row_cnt = $result->num_rows;
 
-//Check to see if this class already in cart
+//Check to see if this class is already enrolled
 if($row_cnt == 1)
 {
-  echo "This course is already in your cart!";
+  echo "You've already enrolled this course!";
 }
 else
 {
 
-  $sql = "INSERT INTO Cart (SID, CID)
+  $sql = "INSERT INTO Student_Course (SID, CID)
           VALUES ('$SID', '$CID')";
 
   if ($conn->query($sql) === TRUE)
   {
-    echo "Course Added To Cart!";
+    echo "Course Successfully Enrolled!";
   }
   else {
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
 
-  $sql = "DELETE FROM favorites WHERE SID = $SID and CID = $CID";
+  $sql = "DELETE FROM cart WHERE SID = $SID and CID = $CID";
 
   if ($conn->query($sql) === TRUE)
   {
-    echo "Course No Longer in Favorites!";
+    echo "Course No Longer in Cart!";
   }
   else {
     echo "Error: " . $sql . "<br>" . $conn->error;
