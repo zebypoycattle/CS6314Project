@@ -200,7 +200,7 @@ $(document).ready(function() {
         validUsername = false;
         $(".credentialInput").focus().val("").focus();
       }
-      else if(!isUpperLowerAlphaNumeric(usernameInput)) {
+      else if(!isAlphaNumeric(usernameInput)) {
         validUsername = false;
         $(".credentialInput").focus().val("").focus();
       }
