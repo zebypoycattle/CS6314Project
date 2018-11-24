@@ -73,8 +73,8 @@ while($row = mysqli_fetch_array($result))
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/home.js">
     <script type="text/javascript">
-
     function updateClass ()
     {
       var className = document.getElementById("className").value;
@@ -124,7 +124,7 @@ while($row = mysqli_fetch_array($result))
 
     <body>
 
-        <div class="form">
+        <div class="form" id="editCourse">
 
             <div class="tab-content">
 
@@ -151,7 +151,7 @@ while($row = mysqli_fetch_array($result))
                     <label id="termText">
                       Term<span class="req">*</span>
                     </label>
-                    <select id="classTerm" name="term" required>
+                    <select class="formDropDown" id="classTerm" name="term" required>
                       <option style="display:none"></option>
                       <option value="19Spring" <?php if($term == '19Spring'){echo "selected ";}?> >19Spring</option>
                       <option value="19Summer" <?php if($term == '19Summer'){echo "selected ";}?> >19Summer</option>
@@ -180,10 +180,10 @@ while($row = mysqli_fetch_array($result))
                       <label id="daysText">
                         Days<span class="req">*</span>
                       </label>
-                      <select id="days" name="days" required>
+                      <select class="formDropDown" id="days" name="days" required>
                         <option style="display:none"></option>
-                        <option value="M/W" <?php if($days == 'M/W'){echo "selected ";}?> >M/W</option>
-                        <option value="T/Th" <?php if($days == 'T/Th'){echo "selected ";}?> >T/Th</option>
+                        <option value="M/W" <?php if($days == 'Mon&Wed'){echo "selected ";}?> >M/W</option>
+                        <option value="T/Th" <?php if($days == 'Tue&Thu'){echo "selected ";}?> >T/Th</option>
                       </select>
                     </div>
 
@@ -191,7 +191,7 @@ while($row = mysqli_fetch_array($result))
                       <label id="timeText">
                         Time<span class="req">*</span>
                       </label>
-                      <select id="time" name="time" required>
+                      <select class="formDropDown" id="time" name="time" required>
                         <option style="display:none"></option>
                         <option value="8:30am-9:45am" <?php if($time == '8:30am-9:45am'){echo "selected ";}?> >8:30am-9:45am</option>
                         <option value="10:00am-11:15am" <?php if($time == '10:00am-11:15am'){echo "selected ";}?> >10:00am-11:15am</option>
@@ -214,7 +214,7 @@ while($row = mysqli_fetch_array($result))
                     <label id="levelText">
                       Level<span class="req">*</span>
                     </label>
-                    <select id="classLevel" name="level" required>
+                    <select class="formDropDown" id="classLevel" name="level" required>
                       <option style="display:none"></option>
                       <option value="Undergraduate" <?php if($level == 'Undergraduate'){echo "selected ";}?> >Undergraduate</option>
                       <option value="Graduate" <?php if($level == 'Graduate'){echo "selected ";}?> >Graduate</option>
