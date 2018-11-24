@@ -1,4 +1,6 @@
 $(document).ready(function() {
+  $('#editCourse').find('input, select, textarea').prev('label').addClass('active');
+
   $('.form').find('input, select, textarea').on('keyup blur focus', function (e) {
     
     var $this = $(this),
