@@ -128,11 +128,8 @@ $(document).ready(function() {
         }
         else {
           var validatedUsername = validateUsername(event, userNameInput, userLabel);
-          console.log(validatedUsername);
           var validatedPassword = validatePassword(event, passwordInput);
-          console.log(validatedPassword);
           var validatedEmail = validateEmail(event, emailInput);
-          console.log(validatedEmail);
           if (!validatedUsername || !validatedPassword || !validatedEmail) {
             alert("Invalid username, password, and/or e-mail address.");
             return validationComplete;
@@ -190,7 +187,6 @@ $(document).ready(function() {
 
   function validateUsername(event, usernameInput, userLabel) {
       var validUsername = true;
-      console.log(userLabel);
 
       if(userLabel === "Username is not available, select a new username.") {
         validUsername = false;
@@ -221,7 +217,6 @@ $(document).ready(function() {
 
   function validateEmail(event, emailAddress) {
     var validEmail = true;
-    console.log(emailAddress);
 
     if(!emailAddress.includes("@")) {
       validEmail = false;
@@ -231,9 +226,6 @@ $(document).ready(function() {
       var emailAccount = emailAddress.substring(0, emailAddress.indexOf("@"));
       var emailDomain = emailAddress.substring(emailAddress.indexOf("@")+1, emailAddress.length-4);
       var emailHost = emailAddress.substring(emailAddress.length-4);
-      console.log(emailAccount);
-      console.log(emailDomain);
-      console.log(emailHost);
 
       if(!isAlphaNumeric(emailAccount)) {
         validEmail = false;
@@ -254,7 +246,7 @@ $(document).ready(function() {
 
 
   function isAlphaNumeric(inputtxt) {
-      var letter = /^[a-zA-Z0-9]+$/;
+      var letter = /^[a-zA-Z0-9.]+$/;
       if(inputtxt.match(letter)) {
         return true;
        }
