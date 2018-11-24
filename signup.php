@@ -11,6 +11,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $email = test_input($_POST["email"]);
 }
 
+echo "<SCRIPT type='text/javascript'>
+    console.log($email);
+</SCRIPT>"; 
+
 $user = 'root';
 $password = 'root';
 $db = 'course_registration';
@@ -42,7 +46,7 @@ if($account !== "admin") {
 	$registerUserStudent = "INSERT INTO user_student(Username, SID) VALUES ('$username', '$studentID')";
 	mysqli_query($conn, $registerUserStudent);
 
-  $registerStudent = "INSERT INTO student(SID, FName, LName, Email, Degree) VALUES ('$studentID', '$firstName', '$lastName', $email, $account)";
+  $registerStudent = "INSERT INTO student(SID, FName, LName, Email, Degree) VALUES ('$studentID', '$firstName', '$lastName', '$email', '$account')";
   mysqli_query($conn, $registerStudent);
 
 }
