@@ -1,5 +1,6 @@
 $(document).ready(function() {
   $('#editCourse').find('input, select, textarea').prev('label').addClass('active');
+  $('#textbookLabel').addClass('active');
 
   $('.form').find('input, select, textarea').on('keyup blur focus', function (e) {
     
@@ -33,7 +34,7 @@ $(document).ready(function() {
   		    label.addClass('highlight');
   			}
       }
-
+      $('#textbookLabel').addClass('active');
   });
 
   $('.tab a').on('click', function (e) {
@@ -55,7 +56,7 @@ $(document).ready(function() {
     $(this).prev().addClass('active highlight');
   });
 
-  $('.button').on('click', function(e) {
+  $('.accountButton').on('click', function(e) {
      var selector = $(this);
      if(!validate(e, selector)) {
         e.preventDefault();
@@ -117,7 +118,11 @@ $(document).ready(function() {
     if(id === "createButton") {
         var nameDiv = $(userNameDiv).prev();
         var firstNameDiv = $(nameDiv).find("#firstNameDiv");
+        var fNameInput = $(firstNameDiv).find('input').val();
+
         var lastNameDiv = $(nameDiv).find("#lastNameDiv");
+        var lNameInput = $(lastNameDiv).find('input').val();
+
         var infoDiv = $(nameDiv).prev();
         var accountDiv = $(infoDiv).find("#accountDiv");
         var emailDiv = $(infoDiv).find("#emailDiv");
@@ -132,8 +137,10 @@ $(document).ready(function() {
           var validatedUsername = validateUsername(event, userNameInput, userLabel);
           var validatedPassword = validatePassword(event, passwordInput);
           var validatedEmail = validateEmail(event, emailInput);
-          if (!validatedUsername || !validatedPassword || !validatedEmail) {
-            alert("Invalid username, password, and/or e-mail address.");
+          var validatedFName = validateName(event, fNameInput);
+          var validatedLName = validateName(event, lNameInput)
+          if (!validatedUsername || !validatedPassword || !validatedEmail || !validatedFName || !validatedLName) {
+            alert("One or more input fields are invalid.");
             return validationComplete;
           }
         }
@@ -229,7 +236,7 @@ $(document).ready(function() {
       var emailDomain = emailAddress.substring(emailAddress.indexOf("@")+1, emailAddress.length-4);
       var emailHost = emailAddress.substring(emailAddress.length-4);
 
-      if(!isAlphaNumeric(emailAccount)) {
+      if(!isAlphaNumericDot(emailAccount)) {
         validEmail = false;
         $(".credentialInput").focus().val("").focus();
       }
@@ -246,9 +253,29 @@ $(document).ready(function() {
     return validEmail;
   }
 
+  function validateName(event, name) {
+    var validName = true;
+    if(!isAlpha(name)) {
+      validName = false;
+      $(".credentialInput").focus().val("").focus();
+    }
 
-  function isAlphaNumeric(inputtxt) {
+    return validName;
+  }
+
+
+  function isAlphaNumericDot(inputtxt) {
       var letter = /^[a-zA-Z0-9.]+$/;
+      if(inputtxt.match(letter)) {
+        return true;
+       }
+       else {
+        return false;
+      }
+  }
+
+   function isAlphaNumeric(inputtxt) {
+      var letter = /^[a-zA-Z0-9]+$/;
       if(inputtxt.match(letter)) {
         return true;
        }
@@ -259,6 +286,16 @@ $(document).ready(function() {
 
    function isLowerAlpha(inputtxt) {
       var letter = /^[a-z]+$/;
+      if(inputtxt.match(letter)) {
+        return true;
+       }
+       else {
+        return false;
+      }
+  }
+
+   function isAlpha(inputtxt) {
+      var letter = /^[A-za-z]+$/;
       if(inputtxt.match(letter)) {
         return true;
        }
