@@ -46,5 +46,51 @@ session_start();
         <li>Click on the Favorites tab to see your favorited courses.</li>
         <li>Click on the Enroll tab to arrange your cart and enroll in your courses.</li>
       </ul>
+      <div>
+      <?php
+
+         if($accountType == 'student') {
+            $user = 'root';
+            $password = 'root';
+            $db = 'course_registration';
+            $host = 'localhost';
+            $port = 3306;
+
+            $conn = mysqli_init();
+            $conn = mysqli_connect(
+               $host,
+               $user,
+               $password,
+               $db,
+               $port
+            );
+
+            if (!$conn) {
+              echo "Connection failed!";
+              exit;
+            }
+
+            
+
+            $sql = "SELECT c.* FROM user_student AS s INNER JOIN student_course AS sc on s.SID = sc.SID INNER JOIN course AS c ON sc.CID = c.CID INNER JOIN term AS t ON c.term = t.term WHERE s.Username = '$username' AND t.currentTermToRegister = 1 ORDER BY c.CID ASC";
+
+
+            $result = mysqli_query($conn, $sql);
+
+            
+            if(mysqli_num_rows($result) > 0) {
+              echo "<br><br>";
+              echo "<h1>Upcoming Semester Enrollment</h1>";
+              echo "<table class='table table-striped'><tr><td>Course ID</td><td>Section</td><td>Course Name</td><td>Term</td><td>Schedule</td><td>Location</td><td>Level</td></tr>";
+              while($row = mysqli_fetch_array($result)) {
+                echo "<tr><td>". $row["CID"] ."</td><td>" .$row["Section"]. "</td><td>". $row["CName"]."</td><td>". $row["Term"]."</td><td>" .$row["Schedule"]. "</td><td>". $row["Location"]."</td><td>".$row["Level"]."</td></tr>";
+              }
+              echo "</table>";
+            }
+            
+            mysqli_close();
+            }
+      ?>
+    </div>
 	</body>
 </html>

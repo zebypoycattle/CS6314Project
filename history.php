@@ -58,7 +58,7 @@
 
   
 
-  $sql = "SELECT c.* FROM user_student AS s INNER JOIN student_course AS sc on s.SID = sc.SID INNER JOIN course AS c ON sc.CID = c.CID WHERE s.Username = '$username' ORDER BY c.CID ASC";
+  $sql = "SELECT c.* FROM user_student AS s INNER JOIN student_course AS sc on s.SID = sc.SID INNER JOIN course AS c ON sc.CID = c.CID INNER JOIN term AS t ON c.term = t.term WHERE s.Username = '$username' AND t.currentTermToRegister = 0 ORDER BY c.CID ASC";
 
 
   $result = mysqli_query($conn, $sql);

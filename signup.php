@@ -9,11 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $firstName = test_input($_POST["firstName"]);
   $lastName = test_input($_POST["lastName"]);
   $email = test_input($_POST["email"]);
-}
-
-echo "<SCRIPT type='text/javascript'>
-    console.log($email);
-</SCRIPT>"; 
+} 
 
 $user = 'root';
 $password = 'root';
@@ -36,7 +32,7 @@ if (!$conn) {
 }
 
 
-if($account !== "admin") {
+if($account !== "Admin") {
 	$category = "student";
 	$largestStudentID = "SELECT SID FROM user_student ORDER BY SID DESC LIMIT 1";
 	$sql = mysqli_query($conn, $largestStudentID);
@@ -46,12 +42,12 @@ if($account !== "admin") {
 	$registerUserStudent = "INSERT INTO user_student(Username, SID) VALUES ('$username', '$studentID')";
 	mysqli_query($conn, $registerUserStudent);
 
-  $registerStudent = "INSERT INTO student(SID, FName, LName, Email, Degree) VALUES ('$studentID', '$firstName', '$lastName', '$email', '$account')";
+  $registerStudent = "INSERT INTO student(SID, FName, LName, Email, Degree) VALUES ('$studentID', '$firstName', '$lastName', '$email', '$account')"; 
   mysqli_query($conn, $registerStudent);
 
 }
 else {
-	$category = $account;
+	$category = "admin";
 }
 
 
@@ -59,20 +55,10 @@ $hash = password_hash($pwd, PASSWORD_DEFAULT);
 $registerAccount = "INSERT INTO user(Username, Category, Pwd) VALUES ('$username', '$category', '$hash')";
 mysqli_query($conn, $registerAccount);
 
-mysqli_close();
-
-session_start();
-$_SESSION['username'] = $username;
-$_SESSION['account'] = $category;
-$_SESSION['SID'] = $studentID;
-
-
-$message = "New account created.";
-echo "<SCRIPT type='text/javascript'>
-    alert('$message');
-    window.location.replace(\"home.php\");
-</SCRIPT>"; 
+$message = "Account successfully created.";
+echo "<script type='text/javascript'>alert('$message');</script>";
 header("Location: home.php");
+mysqli_close();
 
 
 

@@ -8,6 +8,7 @@
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
+    <script src="js/home.js"></script>
     <script type="text/javascript">
 
     function addClass ()
@@ -55,7 +56,6 @@
 
 
     </script>
-    <script  src="js/home.js"></script>
   </head>
     <body>
 
@@ -169,7 +169,7 @@
                     <label id="textbookLabel">
                       Textbook<span class="req">*</span>
                     </label>
-                    <input type="file" name="pic" accept="image/*">
+                      <input type="file" name="pic" accept="image/*">
                   </div>
 
                   <div class="field-wrap">
@@ -215,14 +215,14 @@
                   <label>
                     First Name<span class="req">*</span>
                   </label>
-                  <input type="text" name="firstName" autocomplete="off" />
+                  <input class="credentialInput" type="text" name="firstName" autocomplete="off" />
                 </div>
             
                 <div class="field-wrap" id= "lastNameDiv">
                   <label>
                     Last Name<span class="req">*</span>
                   </label>
-                  <input type="text" name="lastName" autocomplete="off"/>
+                  <input class="credentialInput" type="text" name="lastName" autocomplete="off"/>
                 </div>
               </div>
 
@@ -240,7 +240,7 @@
                 <input class="credentialInput" type="password" name="password" autocomplete="off"/>
               </div>
               
-              <button id="createButton" type="submit" class="button button-block"/>Create Account</button>
+              <button id="createButton" type="submit" class="accountButton button button-block"/>Create Account</button>
             
             </form>
 

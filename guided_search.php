@@ -56,6 +56,7 @@ if (!$conn){
 $sql = "SELECT * FROM course c
         INNER JOIN course_professor cp ON c.CID = cp.CID
         INNER JOIN professor p ON p.PID = cp.PID
+        INNER JOIN term t ON t.term = c.term
         WHERE ";
 
 if($name != "")
@@ -97,6 +98,8 @@ else
 {
   $sql .= "Location != 'online'";
 }
+
+$sql .= " AND t.currentTermToRegister = 1";
 
 $sql .= " order by section asc";
 

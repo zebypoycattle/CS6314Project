@@ -35,7 +35,7 @@ if (!$conn) {
   if(password_verify($pwd, $record["Pwd"])) {
     session_start();
 	  $_SESSION['username'] = $username;
-    $_SESSION['account'] = $record["Category"];
+    $_SESSION['account'] = strtolower($record["Category"]);
     $_SESSION['SID'] = $record["SID"];
 	  header("Location: home.php");
   }

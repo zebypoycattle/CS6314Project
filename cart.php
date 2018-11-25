@@ -110,7 +110,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/class_search.css">
   <link rel="stylesheet" href="css/navbar.css">
-	<title>Favorites</title>
+	<title>Cart</title>
 </head>
 
 <body>
@@ -127,7 +127,7 @@
   </div>
 
   <br><br>
-  <h1> Favorites </h1>
+  <h1> Cart </h1>
 
   <br>
 
