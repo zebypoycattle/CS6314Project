@@ -41,3 +41,10 @@ CREATE TABLE `course_registration`.`User_Student` (`Username` TEXT NOT NULL, `SI
 INSERT INTO `User_Student` (`Username`, `SID`) VALUES ('jxw123', '1');
 INSERT INTO `User_Student` (`Username`, `SID`) VALUES ('rxg456', '2');
 INSERT INTO `User_Student` (`Username`, `SID`) VALUES ('mxh789', '3');
+
+CREATE TABLE `course_registration`.`term` (`term` TEXT NOT NULL, `currentTermToRegister` BOOLEAN NOT NULL, PRIMARY KEY(`term`));
+INSERT INTO `term` (`term`, `currentTermToRegister`) VALUE (`19Spring`, `1`);
+INSERT INTO `term` (`term`, `currentTermToRegister`) VALUE (`18Fall`, `0`);
+
+                                                                                                              
+                                                                                                              
