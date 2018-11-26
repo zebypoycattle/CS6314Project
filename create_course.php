@@ -4,9 +4,18 @@ session_start();
 $className = $_GET["className"];
 $section = $_GET["section"];
 $term = $_GET["term"];
+$year = $_GET["year"];
 $professorFirstName = $_GET["professorFirstName"];
 $professorLastName = $_GET["professorLastName"];
-$schedule = $_GET["days"] . " " . $_GET["time"];
+$dayVal = $_GET["days"];
+$day = "";
+if($dayVal === "Mon") {
+  $day = "Mon&Wed";
+}
+else {
+  $day = "Tue&Thu";
+}
+$time = $_GET["time"];
 $level = $_GET["level"];
 $location = $_GET["location"];
 $seats = $_GET["seats"];
@@ -59,8 +68,8 @@ if($row_cnt == 0)
 }
 
 //Insert into courses
-$sql = "INSERT INTO Course (Section, CName, Term, Schedule, Location, OpenSeats, Level)
-        VALUES ('$section', '$className', '$term', '$schedule', '$location', $seats, '$level')";
+$sql = "INSERT INTO Course (Section, CName, Semester, Year, Day, Time, Location, OpenSeats, Level)
+        VALUES ('$section', '$className', 'Spring', '$year', '$day', '$time', '$location', '$seats', '$level')";
 
 if ($conn->query($sql) === TRUE)
 {

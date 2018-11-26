@@ -56,7 +56,7 @@ if (!$conn){
 $sql = "SELECT * FROM course c
         INNER JOIN course_professor cp ON c.CID = cp.CID
         INNER JOIN professor p ON p.PID = cp.PID
-        INNER JOIN term t ON t.term = c.term
+        INNER JOIN term t ON t.Semester = c.Semester AND t.Year = c.Year
         WHERE ";
 
 if($name != "")
@@ -108,18 +108,18 @@ $result = mysqli_query($conn, $sql);
 
 if($accountType == 'student')
 {
-  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td></tr>";
+  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td></tr>";
 }
 else
 {
-  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
+  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
 }
 
 while($row = mysqli_fetch_array($result))
 {
   $CID = $row["CID"];
 
-	echo "<tr><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Schedule"]. "</td><td>". $row["Location"]. "</td>";
+	echo "<tr><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>".$row["Day"]."</td><td>". $row["Time"]. "</td><td>". $row["Location"]. "</td>";
 
   echo "<td><a href = 'image$CID.html'><img style = 'width: 50px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
 

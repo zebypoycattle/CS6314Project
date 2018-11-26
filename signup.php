@@ -39,11 +39,8 @@ if($account !== "Admin") {
 	$row = mysqli_fetch_array($sql);
 	$studentID = (int) $row["SID"] + 1;
 
-	$registerUserStudent = "INSERT INTO user_student(Username, SID) VALUES ('$username', '$studentID')";
+	$registerUserStudent = "INSERT INTO user_student(Username, SID, Degree) VALUES ('$username', '$studentID', '$account')";
 	mysqli_query($conn, $registerUserStudent);
-
-  $registerStudent = "INSERT INTO student(SID, FName, LName, Email, Degree) VALUES ('$studentID', '$firstName', '$lastName', '$email', '$account')"; 
-  mysqli_query($conn, $registerStudent);
 
 }
 else {
@@ -52,7 +49,7 @@ else {
 
 
 $hash = password_hash($pwd, PASSWORD_DEFAULT);
-$registerAccount = "INSERT INTO user(Username, Category, Pwd) VALUES ('$username', '$category', '$hash')";
+$registerAccount = "INSERT INTO user(Username, Category, Pwd, Fname, LName, Email) VALUES ('$username', '$category', '$hash', '$firstName', '$lastName', '$email')";
 mysqli_query($conn, $registerAccount);
 
 $message = "Account successfully created.";

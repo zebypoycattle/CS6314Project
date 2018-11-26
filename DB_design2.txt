@@ -1,0 +1,28 @@
+DB: course_registration
+
+Course
+CID (PK), Section, CName, Semester, Year, Day, Time, Location, OpenSeats, Level
+
+Professor
+PID (PK), FName, LName, Email
+
+Student_Course
+SID (PK), CID (PK)
+
+Course_Professor
+CID (PK), PID (PK)
+
+Favorites
+SID (PK), CID (PK)
+
+Cart
+SID (PK), CID (PK)
+
+User
+Username (PK), Category, Pwd, FName, LName, Email
+
+User_Student
+Username (PK), SID, Degree
+
+Term
+Semester (PK), Year (PK), currentTermToRegister

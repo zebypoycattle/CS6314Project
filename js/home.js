@@ -140,7 +140,7 @@ $(document).ready(function() {
           var validatedFName = validateName(event, fNameInput);
           var validatedLName = validateName(event, lNameInput)
           if (!validatedUsername || !validatedPassword || !validatedEmail || !validatedFName || !validatedLName) {
-            alert("One or more input fields are invalid.");
+           alert("One or more input fields are invalid.");
             return validationComplete;
           }
         }

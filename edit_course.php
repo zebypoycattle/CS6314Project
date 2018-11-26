@@ -29,12 +29,10 @@ while($row = mysqli_fetch_array($result))
 {
   $section = $row["Section"];
   $className = $row["CName"];
-  $term = $row["Term"];
-
-  $schedule = $row["Schedule"];
-  $words = explode(" ", $schedule);
-  $days = $words[0];
-  $time = $words[1];
+  $term = $row["Semester"];
+  $year = $row["Year"];
+  $days = $row["Day"];
+  $time = $row["Time"];
 
   $location = $row["Location"];
   $seats = $row["OpenSeats"];
@@ -80,6 +78,7 @@ while($row = mysqli_fetch_array($result))
       var className = document.getElementById("className").value;
       var section = document.getElementById("classSection").value;
       var term = document.getElementById("classTerm").value;
+      var year = document.getElementById("yearTerm").value;
       var professorFirstName = document.getElementById("professorFirstName").value;
       var professorLastName = document.getElementById("professorLastName").value;
       var days = document.getElementById("days").value;
@@ -107,7 +106,7 @@ while($row = mysqli_fetch_array($result))
               window.location.replace("courses_page.php");
           }
       };
-      var http = "update_course.php?className=" + className +"&section="+section+"&term="+term+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats+"&CID="+<?php echo $CID?>;
+      var http = "update_course.php?className=" + className +"&section="+section+"&term="+term+"&year="+year+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats+"&CID="+<?php echo $CID?>;
       xmlhttp.open("GET",http,true);
       xmlhttp.send();
       //alert("Course Updated Successsfully");
@@ -147,16 +146,30 @@ while($row = mysqli_fetch_array($result))
                     <input type="text" id="className" name="className" value = "<?php echo $className; ?>" autocomplete="off"/>
                   </div>
 
-                  <div class="field-wrap">
-                    <label id="termText">
-                      Term<span class="req">*</span>
-                    </label>
-                    <select class="formDropDown" id="classTerm" name="term" required>
-                      <option style="display:none"></option>
-                      <option value="19Spring" <?php if($term == '19Spring'){echo "selected ";}?> >19Spring</option>
-                      <option value="19Summer" <?php if($term == '19Summer'){echo "selected ";}?> >19Summer</option>
-                      <option value="19Fall" <?php if($term == '19Fall'){echo "selected ";}?> >19Fall</option>
-                    </select>
+                  <div class="top-row">
+                      
+                    <div class="field-wrap">
+                      <label id="termText">
+                        Term<span class="req">*</span>
+                      </label>
+                      <select class="formDropDown" id="classTerm" name="term" required>
+                        <option style="display:none"></option>
+                        <option value="Spring" <?php if($term == 'Spring'){echo "selected ";}?> >Spring</option>
+                        <option value="Summer" <?php if($term == 'Summer'){echo "selected ";}?> >Summer</option>
+                        <option value="Fall" <?php if($term == 'Fall'){echo "selected ";}?> >Fall</option>
+                      </select>
+                    </div>
+
+                       <div class="field-wrap">
+                        <label id="yearText">
+                          Year<span class="req">*</span>
+                        </label>
+                        <select id="yearTerm" class="formDropDown" name="year" required>
+                          <option style="display:none"></option>
+                          <option value="2019" <?php if($year == '2019'){echo "selected ";}?> >2019</option>
+                          <option value="2020" <?php if($year == '2020'){echo "selected ";}?> >2020</option>
+                        </select>
+                      </div>
                   </div>
 
                   <div class="top-row">
@@ -182,8 +195,8 @@ while($row = mysqli_fetch_array($result))
                       </label>
                       <select class="formDropDown" id="days" name="days" required>
                         <option style="display:none"></option>
-                        <option value="M/W" <?php if($days == 'Mon&Wed'){echo "selected ";}?> >M/W</option>
-                        <option value="T/Th" <?php if($days == 'Tue&Thu'){echo "selected ";}?> >T/Th</option>
+                        <option value="Mon&Wed" <?php if($days == 'Mon&Wed'){echo "selected ";}?> >Mon&Wed</option>
+                        <option value="Tue&Thu" <?php if($days == 'Tue&Thu'){echo "selected ";}?> >Tue&Thu</option>
                       </select>
                     </div>
 

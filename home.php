@@ -30,7 +30,32 @@ session_start();
   			</div>
 		</div>
       <?php
-        echo "<br><br><h1> Welcome to Course Registration, $username!</h1>";
+        $user = 'root';
+        $password = 'root';
+        $db = 'course_registration';
+        $host = 'localhost';
+        $port = 3306;
+
+        $conn = mysqli_init();
+        $conn = mysqli_connect(
+           $host,
+           $user,
+           $password,
+           $db,
+           $port
+        );
+
+        if (!$conn) {
+          echo "Connection failed!";
+          exit;
+        }  
+
+
+        $sql = "SELECT FName FROM user WHERE Username = '$username'";
+        $record = mysqli_fetch_array(mysqli_query($conn, $sql));
+        mysqli_close();
+        $name = ucfirst($record['FName']);
+        echo "<br><br><h1> Welcome to Course Registration, $name!</h1>";
       ?>
       <ul>
         <?php
@@ -72,24 +97,26 @@ session_start();
 
             
 
-            $sql = "SELECT c.* FROM user_student AS s INNER JOIN student_course AS sc on s.SID = sc.SID INNER JOIN course AS c ON sc.CID = c.CID INNER JOIN term AS t ON c.term = t.term WHERE s.Username = '$username' AND t.currentTermToRegister = 1 ORDER BY c.CID ASC";
+             $sql = "SELECT c.* FROM user_student AS s INNER JOIN student_course AS sc ON s.SID = sc.SID INNER JOIN course AS c ON sc.CID = c.CID INNER JOIN term AS t ON c.Year = t.Year AND c.Semester = t.Semester WHERE s.Username = '$username' AND t.currentTermToRegister = 1 ORDER BY c.CID ASC";
 
 
             $result = mysqli_query($conn, $sql);
+
 
             
             if(mysqli_num_rows($result) > 0) {
               echo "<br><br>";
               echo "<h1>Upcoming Semester Enrollment</h1>";
-              echo "<table class='table table-striped'><tr><td>Course ID</td><td>Section</td><td>Course Name</td><td>Term</td><td>Schedule</td><td>Location</td><td>Level</td></tr>";
+              echo "<table class='table table-striped'><tr><td>Course ID</td><td>Section</td><td>Course Name</td><td>Semester</td><td>Year</td><td>Day</td><td>Time</td><td>Location</td><td>Level</td></tr>";
+              
               while($row = mysqli_fetch_array($result)) {
-                echo "<tr><td>". $row["CID"] ."</td><td>" .$row["Section"]. "</td><td>". $row["CName"]."</td><td>". $row["Term"]."</td><td>" .$row["Schedule"]. "</td><td>". $row["Location"]."</td><td>".$row["Level"]."</td></tr>";
+                echo "<tr><td>". $row["CID"] ."</td><td>" .$row["Section"]. "</td><td>". $row["CName"]."</td><td>".$row["Semester"]."</td><td>".$row["Year"]."</td><td>".$row["Day"]."</td><td>".$row["Time"]."</td><td>".$row["Location"]."</td><td>".$row["Level"]."</td></tr>";
               }
               echo "</table>";
             }
             
             mysqli_close();
-            }
+          }
       ?>
     </div>
 	</body>

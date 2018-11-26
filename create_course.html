@@ -16,6 +16,7 @@
       var className = document.getElementById("className").value;
       var section = document.getElementById("classSection").value;
       var term = document.getElementById("classTerm").value;
+      var year = document.getElementById("yearTerm").value;
       var professorFirstName = document.getElementById("professorFirstName").value;
       var professorLastName = document.getElementById("professorLastName").value;
       var days = document.getElementById("days").value;
@@ -44,7 +45,7 @@
               window.location.replace("courses_page.php");
           }
       };
-      var http = "create_course.php?className=" + className +"&section="+section+"&term="+term+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats;
+      var http = "create_course.php?className=" + className +"&section="+section+"&term="+term+"&year="+year+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats;
       xmlhttp.open("GET",http,true);
       xmlhttp.send();
       //alert("Course Added Successsfully");
@@ -87,17 +88,33 @@
                     <input type="text" id="className" name="className" autocomplete="off"/>
                   </div>
 
-                  <div class="field-wrap">
-                    <label id="termText">
-                      Term<span class="req">*</span>
-                    </label>
-                    <select id="classTerm" class="formDropDown" name="term" required>
-                      <option style="display:none"></option>
-                      <option value="19Spring">19Spring</option>
-                      <option value="19Summer">19Summer</option>
-                      <option value="19Fall">19Fall</option>
-                    </select>
+
+                  <div class="top-row">
+                       <div class="field-wrap">
+                        <label id="termText">
+                          Semester<span class="req">*</span>
+                        </label>
+                        <select id="classTerm" class="formDropDown" name="term" required>
+                          <option style="display:none"></option>
+                          <option value="Spring">Spring</option>
+                          <option value="Summer">Summer</option>
+                          <option value="Fall">Fall</option>
+                        </select>
+                      </div>
+
+                       <div class="field-wrap">
+                        <label id="yearText">
+                          Year<span class="req">*</span>
+                        </label>
+                        <select id="yearTerm" class="formDropDown" name="year" required>
+                          <option style="display:none"></option>
+                          <option value="2019">2019</option>
+                          <option value="2020">2020</option>
+                        </select>
+                      </div>
                   </div>
+
+               
 
                   <div class="top-row">
                     <div class="field-wrap" id= "professorfirstNameDiv">
@@ -122,8 +139,8 @@
                       </label>
                       <select id="days" name="days" class="formDropDown" required>
                         <option style="display:none"></option>
-                        <option value="M/W">M/W</option>
-                        <option value="T/Th">T/Th</option>
+                        <option value="Mon">Mon&Wed</option>
+                        <option value="Tue">Tue&Thu</option>
                       </select>
                     </div>
 
