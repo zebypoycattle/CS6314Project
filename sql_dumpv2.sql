@@ -30,9 +30,9 @@ INSERT INTO `Cart` (`SID`, `CID`) VALUES ('1', '3');
 
 
 CREATE TABLE `course_registration`.`User` ( `Username` VARCHAR(10) NOT NULL , `Category` TEXT NOT NULL , `Pwd` TEXT NOT NULL , `FName` TEXT NOT NULL , `LName` TEXT NOT NULL , `Email` TEXT NOT NULL, PRIMARY KEY (`Username`));
-INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('jxw123', 'student', '$$2y$10$gBES7xgVfGc2QYK0M21pWuoP0DUL2MAMQEcvYQg0hhxm7mYLGAkFq', 'John', 'Will', 'jw@gmail.com');
-INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('mxh789', 'student', '$$2y$10$gBES7xgVfGc2QYK0M21pWuoP0DUL2MAMQEcvYQg0hhxm7mYLGAkFq', 'Ming', 'Hao', 'mh@gmail.com');
-INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('zxp000', 'admin', '$$2y$10$gBES7xgVfGc2QYK0M21pWuoP0DUL2MAMQEcvYQg0hhxm7mYLGAkFq', 'Zeby', 'Poyxcattle', 'zp@gmail.com');
+INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('jxw123', 'student', '$2y$10$vIzYvHcPB8n9/pGgkM3Nc.xYp4A0LeNTpFAl8YBAFQTb3CGKQufRi', 'John', 'Will', 'jw@gmail.com');
+INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('mxh789', 'student', '$2y$10$vIzYvHcPB8n9/pGgkM3Nc.xYp4A0LeNTpFAl8YBAFQTb3CGKQufRi', 'Ming', 'Hao', 'mh@gmail.com');
+INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('zxp000', 'admin', '$2y$10$vIzYvHcPB8n9/pGgkM3Nc.xYp4A0LeNTpFAl8YBAFQTb3CGKQufRi', 'Zeby', 'Poyxcattle', 'zp@gmail.com');
 
 CREATE TABLE `course_registration`.`User_Student` (`Username` VARCHAR(10) NOT NULL, `SID` INT NOT NULL, `Degree` TEXT NOT NULL, PRIMARY KEY (`Username`));
 INSERT INTO `User_Student` (`Username`, `SID`, `Degree`) VALUES ('jxw123', '1', 'graduate');
