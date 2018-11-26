@@ -28,7 +28,7 @@ INSERT INTO `Favorites` (`SID`, `CID`) VALUES ('3', '2');
 CREATE TABLE `course_registration`.`Cart` ( `SID` INT NOT NULL , `CID` INT NOT NULL , PRIMARY KEY (`SID`, `CID`));
 INSERT INTO `Cart` (`SID`, `CID`) VALUES ('1', '3');
 
---password is 1234Abcd case-sensitive
+
 CREATE TABLE `course_registration`.`User` ( `Username` VARCHAR(10) NOT NULL , `Category` TEXT NOT NULL , `Pwd` TEXT NOT NULL , `FName` TEXT NOT NULL , `LName` TEXT NOT NULL , `Email` TEXT NOT NULL, PRIMARY KEY (`Username`));
 INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('jxw123', 'student', '$$2y$10$gBES7xgVfGc2QYK0M21pWuoP0DUL2MAMQEcvYQg0hhxm7mYLGAkFq', 'John', 'Will', 'jw@gmail.com');
 INSERT INTO `User` (`Username`, `Category`, `Pwd`, `Fname`, `LName`, `Email`) VALUES ('mxh789', 'student', '$$2y$10$gBES7xgVfGc2QYK0M21pWuoP0DUL2MAMQEcvYQg0hhxm7mYLGAkFq', 'Ming', 'Hao', 'mh@gmail.com');
