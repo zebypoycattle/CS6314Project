@@ -33,15 +33,31 @@ if (!$conn){
 	exit;
 }
 
-//Get enrollment records with this SID
+//Get enrollment records with this SID and this CID
 $sql = "SELECT * FROM Student_Course WHERE SID=" . $SID . " AND CID=" . $CID;
 $result = mysqli_query($conn, $sql);
 $row_cnt = $result->num_rows;
+
+// Get enrollment records with this SID in current semester
+$sql = "SELECT * FROM Course AS c INNER JOIN Term AS t ON (c.Semester = t.Semester AND c.Year = t.Year) INNER JOIN Student_Course AS sc ON c.CID = sc.CID WHERE sc.SID = " . $SID . " AND t.currentTermToRegister = 1";
+$result = mysqli_query($conn, $sql);
+$row_cnt2 = $result->num_rows;
+
+// get student's degree
+$sql = "SELECT * FROM User_Student WHERE Username = " . $username;
+$result = mysqli_query($conn, $sql);
+$level = $result["Degree"];
 
 //Check to see if this class is already enrolled
 if($row_cnt == 1)
 {
   echo "You've already enrolled this course!";
+}
+else if ($level == "undergraduate" and $row_cnt2 == 4) {
+  echo "You can enroll at most 4 courses as undergraduate";
+}
+else if ($level == "graduate" and $row_cnt2 == 3) {
+  echo "You can enroll at most 3 courses as graduate";
 }
 else
 {
