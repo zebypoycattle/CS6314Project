@@ -139,8 +139,8 @@ while($row = mysqli_fetch_array($result))
 
   if($accountType == 'student')
   {
-    echo "<td> <button onclick='enroll($CID)'>Enroll</button> </td></tr>";
-    echo "<td> <button onclick='remove_from_cart($CID)'>Remove</button> </td>";
+    echo "<td> <button onclick='enroll($CID)'>Enroll</button></td>";
+    echo "<td> <button onclick='remove_from_cart($CID)'>Remove</button></td></tr>";
   }
 
 }
