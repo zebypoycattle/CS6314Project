@@ -1,6 +1,6 @@
 <?php
  // define variables and set to empty values
-$username = $pwd = $category = $account = $email = $firstName = $lastName = $studentID = "";
+$username = $pwd = $category = $account = $dept = $email = $firstName = $lastName = $studentID = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $username = test_input($_POST["username"]);
@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $firstName = test_input($_POST["firstName"]);
   $lastName = test_input($_POST["lastName"]);
   $email = test_input($_POST["email"]);
+  $dept = test_input($_POST["department"]);
 } 
 
 $user = 'root';
@@ -39,7 +40,7 @@ if($account !== "Admin") {
 	$row = mysqli_fetch_array($sql);
 	$studentID = (int) $row["SID"] + 1;
 
-	$registerUserStudent = "INSERT INTO user_student(Username, SID, Degree) VALUES ('$username', '$studentID', '$account')";
+	$registerUserStudent = "INSERT INTO user_student(Username, SID, Degree, DID) VALUES ('$username', '$studentID', '$account', '$dept')";
 	mysqli_query($conn, $registerUserStudent);
 
 }
@@ -51,11 +52,11 @@ else {
 $hash = password_hash($pwd, PASSWORD_DEFAULT);
 $registerAccount = "INSERT INTO user(Username, Category, Pwd, Fname, LName, Email) VALUES ('$username', '$category', '$hash', '$firstName', '$lastName', '$email')";
 mysqli_query($conn, $registerAccount);
-
+mysqli_close();
+echo "Account successfully created.";
 $message = "Account successfully created.";
 echo "<script type='text/javascript'>alert('$message');</script>";
 header("Location: home.php");
-mysqli_close();
 
 
 

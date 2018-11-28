@@ -116,7 +116,10 @@ $(document).ready(function() {
     var divArray;
 
     if(id === "createButton") {
-        var nameDiv = $(userNameDiv).prev();
+        var emailDiv = $(userNameDiv).prev();
+        var emailInput = $(emailDiv).find('input').val();
+
+        var nameDiv = $(emailDiv).prev();
         var firstNameDiv = $(nameDiv).find("#firstNameDiv");
         var fNameInput = $(firstNameDiv).find('input').val();
 
@@ -125,9 +128,8 @@ $(document).ready(function() {
 
         var infoDiv = $(nameDiv).prev();
         var accountDiv = $(infoDiv).find("#accountDiv");
-        var emailDiv = $(infoDiv).find("#emailDiv");
-        var emailInput = $(emailDiv).find('input').val();
-        divArray = [accountDiv, emailDiv, firstNameDiv, lastNameDiv, userNameDiv, passwordDiv];
+        var deptDiv = $(infoDiv).find("#deptDiv");
+        divArray = [accountDiv, deptDiv, firstNameDiv, lastNameDiv, emailDiv, userNameDiv, passwordDiv];
 
         if(!validateRequiredFieldsAreNonEmpty(event, divArray)) {
           alert("Please fill all required fields.");

@@ -1,19 +1,20 @@
 <?php
 session_start();
-
+$dept = $_GET["department"];
 $className = $_GET["className"];
-$section = $_GET["section"];
+$courseNumber = $_GET["courseNumber"];
+$sectionNumber = $_GET["sectionNumber"];
 $term = $_GET["term"];
 $year = $_GET["year"];
 $professorFirstName = $_GET["professorFirstName"];
 $professorLastName = $_GET["professorLastName"];
 $dayVal = $_GET["days"];
 $day = "";
-if($dayVal === "Mon") {
-  $day = "Mon&Wed";
+if($dayVal === "M") {
+  $day = "M/W";
 }
 else {
-  $day = "Tue&Thu";
+  $day = "T/TH";
 }
 $time = $_GET["time"];
 $level = $_GET["level"];
@@ -43,7 +44,6 @@ if (!$conn){
 
 //Check if section exists already
 
-
 //Check if professor teaches a section at this schedule already
 
 
@@ -55,8 +55,8 @@ $row_cnt = $result->num_rows;
 //Insert new professor
 if($row_cnt == 0)
 {
-  $sql = "INSERT INTO professor (FName, LName, Email)
-          VALUES ('$professorFirstName', '$professorLastName', '$professorFirstName$professorLastName@utdallas.edu')";
+  $sql = "INSERT INTO professor (DID, FName, LName, Email)
+          VALUES ('$dept','$professorFirstName', '$professorLastName', '$professorFirstName$professorLastName@utdallas.edu')";
   if ($conn->query($sql) === TRUE)
   {
     echo "New Professor Added Successfully\n";
@@ -68,8 +68,8 @@ if($row_cnt == 0)
 }
 
 //Insert into courses
-$sql = "INSERT INTO Course (Section, CName, Semester, Year, Day, Time, Location, OpenSeats, Level)
-        VALUES ('$section', '$className', 'Spring', '$year', '$day', '$time', '$location', '$seats', '$level')";
+$sql = "INSERT INTO Course (DID, CNumber, Section, CName, Semester, Year, Day, Time, Location, Quota, Level, isDeleted, EnrolledSeats)
+        VALUES ('$dept', '$courseNumber', '$sectionNumber', '$className', 'Spring', '$year', '$day', '$time', '$location', '$seats', '$level', '0', '0')";
 
 if ($conn->query($sql) === TRUE)
 {
@@ -113,7 +113,7 @@ else
 }
 
 
-
+header("Location: home.php");
 
 
 ?>

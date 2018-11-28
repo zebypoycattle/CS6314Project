@@ -3,6 +3,7 @@
 
 <head>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="js/home.js"></script>
 <script type="text/javascript">
 
 
@@ -108,7 +109,6 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/class_search.css">
   <link rel="stylesheet" href="css/navbar.css">
 	<title>Cart</title>
 </head>
@@ -127,36 +127,45 @@
   </div>
 
   <br><br>
-  <h1> Cart </h1>
 
-  <br>
+<div class="form">
+  <h1> Cart </h1>
 
   <form class="submit" id = "class_search_form" method = "get">
 
-    <label for="class_name">Class Name: </label>
-    <input type = "text" id = "name_select"><br>
+    <div class="field-wrap">
+      <label for="class_name">Class Name </label>
+      <input type = "text" id = "name_select">
+    </div>
+    <div class="field-wrap">
+      <label for="class_section">Class Section </label>
+      <input type = "text" id = "section_select">
+    </div>
 
-    <label for="class_section">Class Section: </label>
-    <input type = "text" id = "section_select"><br>
+    <div class="field-wrap">
+      <label for="class_level">Class Level </label>
+      <select class="formDropDown" id = "level_select">
+        <option value="any" style="display:none"></option>
+        <option value="any">Any Level</option>
+        <option value="undergraduate">Undergraduate</option>
+        <option value="graduate">Graduate</option>
+      </select>
+    </div>
 
-    <label for="class_level">Class Level: </label>
-    <select id = "level_select">
-      <option value="any">Any Level</option>
-      <option value="undergraduate">Undergraduate</option>
-      <option value="graduate">Graduate</option>
-    </select><br>
-
-    <label for="class_location">Class Location: </label>
-    <select id = "location_select">
-      <option value="any">Any Location</option>
-      <option value="on campus">On Campus</option>
-      <option value="online">Online</option>
-    </select><br>
+    <div class="field-wrap">
+      <label  for="class_location">Class Location </label>
+      <select class="formDropDown" id = "location_select">
+        <option value="any" style="display:none"></option>
+        <option value="any">Any Location</option>
+        <option value="on campus">On Campus</option>
+        <option value="online">Online</option>
+      </select>
+    </div>
 
   </form>
 
-  <input type="button" id = "search_button" value="Search" onclick = "showData()">
-
+  <input type="button" class="button button-block" id = "search_button" value="Search" onclick = "showData()">
+</div>
   <br>
 
   <div id = "cart_results">

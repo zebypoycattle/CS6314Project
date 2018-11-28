@@ -42,3 +42,5 @@ else
     echo "Error deleting record: " . $conn->error;
     exit();
 }
+
+?>

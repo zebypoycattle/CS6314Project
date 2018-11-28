@@ -1,28 +1,31 @@
 DB: course_registration
 
 Course
-CID (PK), Section, CName, Semester, Year, Day, Time, Location, OpenSeats, Level
+CID (PK), Section, CName, Semester (FK), Year (FK), Day, Time, Location, Quota, Level, isDeleted, EnrolledSeats
 
 Professor
 PID (PK), FName, LName, Email
 
 Student_Course
-SID (PK), CID (PK)
+SID (PK, FK), CID (PK, FK)
 
 Course_Professor
-CID (PK), PID (PK)
+CID (PK, FK), PID (PK, FK)
 
 Favorites
-SID (PK), CID (PK)
+SID (PK, FK), CID (PK, FK)
 
 Cart
-SID (PK), CID (PK)
+SID (PK, FK), CID (PK, FK)
 
 User
 Username (PK), Category, Pwd, FName, LName, Email
 
 User_Student
-Username (PK), SID, Degree
+Username (PK), SID (FK), Degree
 
 Term
 Semester (PK), Year (PK), currentTermToRegister
+
+Textbook
+CID (PK), Src

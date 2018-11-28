@@ -18,10 +18,12 @@ else
 <html lang="en">
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="stylesheet" href="css/class_search.css">
+   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/navbar.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <script src="js/home.js"></script>
 </head>
 <body>
 
@@ -57,6 +59,7 @@ $sql = "SELECT * FROM course c
         INNER JOIN course_professor cp ON c.CID = cp.CID
         INNER JOIN professor p ON p.PID = cp.PID
         INNER JOIN term t ON t.Semester = c.Semester AND t.Year = c.Year
+        INNER JOIN department d ON c.DID = d.DID
         WHERE ";
 
 if($name != "")
@@ -108,18 +111,18 @@ $result = mysqli_query($conn, $sql);
 
 if($accountType == 'student')
 {
-  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td></tr>";
+  echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td></tr>";
 }
 else
 {
-  echo "<table class='table table-striped'><tr><td>Class Section</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
+  echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
 }
 
 while($row = mysqli_fetch_array($result))
 {
   $CID = $row["CID"];
 
-	echo "<tr><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>".$row["Day"]."</td><td>". $row["Time"]. "</td><td>". $row["Location"]. "</td>";
+	echo "<tr><td>".$row["DName"]."</td><td>".$row["CNumber"]. "</td><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>".$row["Day"]."</td><td>". $row["Time"]. "</td><td>". $row["Location"]. "</td>";
 
   echo "<td><a href = 'image$CID.html'><img style = 'width: 50px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
 

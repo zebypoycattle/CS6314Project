@@ -27,15 +27,23 @@ $sql = "SELECT * FROM course WHERE CID = $CID";
 $result = mysqli_query($conn, $sql);
 while($row = mysqli_fetch_array($result))
 {
-  $section = $row["Section"];
+  $dept = $row["DID"];
+  $courseNumber = $row["CNumber"];
+  $sectionNumber = $row["Section"];
   $className = $row["CName"];
   $term = $row["Semester"];
   $year = $row["Year"];
   $days = $row["Day"];
+  if($days == "M/W") {
+    $days = "M";
+  }
+  else {
+    $days = "T";
+  }
   $time = $row["Time"];
 
   $location = $row["Location"];
-  $seats = $row["OpenSeats"];
+  $seats = $row["Quota"];
   $level = $row["Level"];
 }
 
@@ -71,12 +79,14 @@ while($row = mysqli_fetch_array($result))
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/home.js">
+    <script src="js/animation.js"></script>
     <script type="text/javascript">
     function updateClass ()
     {
+      var dept = document.getElementById("department").value;
       var className = document.getElementById("className").value;
-      var section = document.getElementById("classSection").value;
+      var courseNumber = document.getElementById("courseNumber").value;
+      var sectionNumber = document.getElementById("sectionNumber").value;
       var term = document.getElementById("classTerm").value;
       var year = document.getElementById("yearTerm").value;
       var professorFirstName = document.getElementById("professorFirstName").value;
@@ -106,7 +116,7 @@ while($row = mysqli_fetch_array($result))
               window.location.replace("courses_page.php");
           }
       };
-      var http = "update_course.php?className=" + className +"&section="+section+"&term="+term+"&year="+year+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats+"&CID="+<?php echo $CID?>;
+      var http = "update_course.php?className=" + className +"&department="+dept+"&courseNumber="+courseNumber+"&sectionNumber="+sectionNumber+"&term="+term+"&year="+year+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats+"&CID="+<?php echo $CID?>;
       xmlhttp.open("GET",http,true);
       xmlhttp.send();
       //alert("Course Updated Successsfully");
@@ -132,11 +142,31 @@ while($row = mysqli_fetch_array($result))
 
                 <form id="editForm" method="POST">
 
-                  <div class="field-wrap">
-                    <label id="classSectionLabel">
-                      Course Section<span class="req">*</span>
+                <div class="field-wrap" id= "deptDiv">
+                    <label id="deptText">
+                      Department<span class="req">*</span>
                     </label>
-                    <input type="text" id="classSection" name="classSection" value = "<?php echo $section; ?>" autocomplete="off"/>
+                    <select id="department" name="department" class="formDropDown" required>
+                      <option style="display:none"></option>
+                      <option value="1"<?php if($dept == '1'){echo "selected ";}?>>Computer Science</option>
+                      <option value="2"<?php if($dept == '2'){echo "selected ";}?>>Software Engineering</option>
+                    </select>
+                  </div>
+
+
+                  <div class="top-row">
+                    <div class="field-wrap">
+                      <label id="classSectionLabel">
+                        Course <span class="req">*</span>
+                      </label>
+                      <input type="text" id="courseNumber" name="courseNumber" value = "<?php echo $courseNumber; ?>" autocomplete="off"/>
+                    </div>
+                    <div class="field-wrap">
+                      <label id="classSectionNumberLabel">
+                        Section Number<span class="req">*</span>
+                      </label>
+                      <input type="text" id="sectionNumber" name="sectionNumber" value = "<?php echo $sectionNumber; ?>" autocomplete="off"/>
+                    </div>
                   </div>
 
                   <div class="field-wrap">
@@ -195,8 +225,8 @@ while($row = mysqli_fetch_array($result))
                       </label>
                       <select class="formDropDown" id="days" name="days" required>
                         <option style="display:none"></option>
-                        <option value="Mon&Wed" <?php if($days == 'Mon&Wed'){echo "selected ";}?> >Mon&Wed</option>
-                        <option value="Tue&Thu" <?php if($days == 'Tue&Thu'){echo "selected ";}?> >Tue&Thu</option>
+                        <option value="M" <?php if($days == 'M'){echo "selected ";}?> >M/W</option>
+                        <option value="T" <?php if($days == 'T'){echo "selected ";}?> >T/Th</option>
                       </select>
                     </div>
 
