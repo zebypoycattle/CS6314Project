@@ -32,7 +32,8 @@
     exit();
   }
   else {
-    $username = $_SESSION['username'];  
+    $username = $_SESSION['username'];
+    $accountType = $_SESSION['account'];  
   }
   $username = $_SESSION['username'];  
   $user = 'root';
@@ -56,15 +57,24 @@
   }
 
   
-
-  $sql = "SELECT c.*, d.DName 
-  FROM user_student AS s 
-  INNER JOIN student_course AS sc ON s.SID = sc.SID 
-  INNER JOIN course AS c ON sc.CID = c.CID 
-  INNER JOIN department AS d ON c.DID = D.DID
-  INNER JOIN term AS t ON c.Year = t.Year AND c.Semester = t.Semester 
-  WHERE s.Username = '$username' AND t.currentTermToRegister = 0 
-  ORDER BY c.CID ASC";
+  if($accountType == 'student') {
+    $sql = "SELECT c.*, d.DName 
+    FROM user_student AS s 
+    INNER JOIN student_course AS sc ON s.SID = sc.SID 
+    INNER JOIN course AS c ON sc.CID = c.CID 
+    INNER JOIN department AS d ON c.DID = D.DID
+    INNER JOIN term AS t ON c.Year = t.Year AND c.Semester = t.Semester 
+    WHERE s.Username = '$username' AND t.currentTermToRegister = 0 
+    ORDER BY c.CID ASC";
+  }
+  else {
+    $sql = "SELECT c.*, d.DName 
+    FROM course AS c
+    INNER JOIN department AS d ON c.DID = D.DID
+    INNER JOIN term AS t ON c.Year = t.Year AND c.Semester = t.Semester 
+    WHERE t.currentTermToRegister = 0 
+    ORDER BY c.CID ASC";
+  }
 
 
   $result = mysqli_query($conn, $sql);
