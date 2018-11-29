@@ -1,14 +1,11 @@
 <?php
 session_start();
 $CID = $_GET["CID"];
-
-
 $user = 'root';
 $password = 'root';
 $db = 'course_registration';
 $host = 'localhost';
 $port = 3306;
-
 $conn = mysqli_connect(
    $host,
    $user,
@@ -16,13 +13,10 @@ $conn = mysqli_connect(
    $db,
    $port
 );
-
 if (!$conn){
-
 	echo "Connection failed!";
 	exit;
 }
-
 $sql = "SELECT * FROM course WHERE CID = $CID";
 $result = mysqli_query($conn, $sql);
 while($row = mysqli_fetch_array($result))
@@ -34,19 +28,11 @@ while($row = mysqli_fetch_array($result))
   $term = $row["Semester"];
   $year = $row["Year"];
   $days = $row["Day"];
-  if($days == "M/W") {
-    $days = "M";
-  }
-  else {
-    $days = "T";
-  }
   $time = $row["Time"];
-
   $location = $row["Location"];
   $seats = $row["Quota"];
   $level = $row["Level"];
 }
-
 //Get PID
 $sql = "SELECT * FROM course_professor WHERE CID = $CID";
 $result = mysqli_query($conn, $sql);
@@ -54,7 +40,6 @@ while($row = mysqli_fetch_array($result))
 {
   $PID = $row["PID"];
 }
-
 //Get professor info
 $sql = "SELECT * FROM professor WHERE PID = $PID";
 $result = mysqli_query($conn, $sql);
@@ -63,9 +48,6 @@ while($row = mysqli_fetch_array($result))
   $professorFirstName = $row["FName"];
   $professorLastName = $row["LName"];
 }
-
-
-
 ?>
 
 
@@ -79,55 +61,8 @@ while($row = mysqli_fetch_array($result))
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/home.js"></script>
-    <script type="text/javascript">
-    function updateClass ()
-    {
-      var dept = document.getElementById("department").value;
-      var className = document.getElementById("className").value;
-      var courseNumber = document.getElementById("courseNumber").value;
-      var sectionNumber = document.getElementById("sectionNumber").value;
-      var term = document.getElementById("classTerm").value;
-      var year = document.getElementById("yearTerm").value;
-      var professorFirstName = document.getElementById("professorFirstName").value;
-      var professorLastName = document.getElementById("professorLastName").value;
-      var days = document.getElementById("days").value;
-      var time = document.getElementById("time").value;
-      var level = document.getElementById("classLevel").value;
-      var location = document.getElementById("classLocation").value;
-      var seats = document.getElementById("classSeats").value;
+    <!--<script src="js/home.js"></script>-->
 
-      if (window.XMLHttpRequest)
-      {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-          xmlhttp = new XMLHttpRequest();
-      }
-      else
-      {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.onreadystatechange = function()
-      {
-          if (this.readyState == 4 && this.status == 200)
-          {
-              var test = this.responseText;
-              alert(test);
-              window.location.replace("courses_page.php");
-          }
-      };
-      var http = "update_course.php?className=" + className +"&department="+dept+"&courseNumber="+courseNumber+"&sectionNumber="+sectionNumber+"&term="+term+"&year="+year+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats+"&CID="+<?php echo $CID?>;
-      xmlhttp.open("GET",http,true);
-      xmlhttp.send();
-      //alert("Course Updated Successsfully");
-
-
-
-    }
-
-
-
-    </script>
 
   </head>
 
@@ -140,7 +75,7 @@ while($row = mysqli_fetch_array($result))
 
                 <h1>Edit Class</h1>
 
-                <form id="editForm" method="POST">
+                <form action="update_course.php?CID=<?php echo $CID; ?>" id="editForm" method="POST"  enctype='multipart/form-data'>
 
                 <div class="field-wrap" id= "deptDiv">
                     <label id="deptText">
@@ -177,7 +112,7 @@ while($row = mysqli_fetch_array($result))
                   </div>
 
                   <div class="top-row">
-                      
+
                     <div class="field-wrap">
                       <label id="termText">
                         Term<span class="req">*</span>
@@ -207,7 +142,7 @@ while($row = mysqli_fetch_array($result))
                       <label>
                         Professor First Name<span class="req">*</span>
                       </label>
-                      <input type="text" id = "professorFirstName" name="professorfirstName" value = "<?php echo $professorFirstName; ?>" autocomplete="off" />
+                      <input type="text" id = "professorFirstName" name="professorFirstName" value = "<?php echo $professorFirstName; ?>" autocomplete="off" />
                     </div>
 
                     <div class="field-wrap" id= "professorLastNameDiv">
@@ -225,8 +160,8 @@ while($row = mysqli_fetch_array($result))
                       </label>
                       <select class="formDropDown" id="days" name="days" required>
                         <option style="display:none"></option>
-                        <option value="M" <?php if($days == 'M'){echo "selected ";}?> >M/W</option>
-                        <option value="T" <?php if($days == 'T'){echo "selected ";}?> >T/Th</option>
+                        <option value="M/W" <?php if($days == 'M/W'){echo "selected ";}?> >M/W</option>
+                        <option value="T/TH" <?php if($days == 'T/TH'){echo "selected ";}?> >T/Th</option>
                       </select>
                     </div>
 
@@ -265,13 +200,20 @@ while($row = mysqli_fetch_array($result))
                   </div>
 
                   <div class="field-wrap">
+                    <label id="textbookLabel">
+                      Update Textbook<span class="req">*</span>
+                    </label>
+                      <input id = "textbookSrc" name = "textbookSrc" type="file" accept="image/*">
+                  </div>
+
+                  <div class="field-wrap">
                     <label id="seatsLabel">
                       Total Seats<span class="req">*</span>
                     </label>
                     <input type="text" id="classSeats" name="classSeats" value = "<?php echo $seats; ?>" autocomplete="off"/>
                   </div>
 
-                    <button id = "updateClassButton" class="button button-block" value="Update Class" onclick = "updateClass()"/>Update Class</button>
+                    <button id="updateClassButton" type="submit" class="accountButton button button-block"/>Update Class</button>
 
                 </form>
 

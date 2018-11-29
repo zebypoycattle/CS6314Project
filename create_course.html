@@ -8,71 +8,24 @@
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/home.js"></script>
-    <script type="text/javascript">
+    <!--<script src="js/home.js"></script>-->
 
-    function addClass ()
-    {
-      var dept = document.getElementById("department").value;
-      var className = document.getElementById("className").value;
-      var courseNumber = document.getElementById("courseNumber").value;
-      var sectionNumber = document.getElementById("sectionNumber").value;
-      var term = document.getElementById("classTerm").value;
-      var year = document.getElementById("yearTerm").value;
-      var professorFirstName = document.getElementById("professorFirstName").value;
-      var professorLastName = document.getElementById("professorLastName").value;
-      var days = document.getElementById("days").value;
-      var time = document.getElementById("time").value;
-      var level = document.getElementById("classLevel").value;
-      var location = document.getElementById("classLocation").value;
-      var seats = document.getElementById("classSeats").value;
-
-      if (window.XMLHttpRequest)
-      {
-            // code for IE7+, Firefox, Chrome, Opera, Safari
-          xmlhttp = new XMLHttpRequest();
-      }
-      else
-      {
-            // code for IE6, IE5
-            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
-      }
-      xmlhttp.onreadystatechange = function()
-      {
-          if (this.readyState == 4 && this.status == 200)
-          {
-            
-              window.location.replace("home.php");
-          }
-      };
-      var http = "create_course.php?className=" + className +"&department="+dept+"&courseNumber="+courseNumber+"&sectionNumber="+sectionNumber+"&term="+term+"&year="+year+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats;
-      xmlhttp.open("GET",http,true);
-      xmlhttp.send();
-      alert("Course added successsfully.");
-
-
-
-    }
-
-
-
-    </script>
   </head>
     <body>
 
     <div class="form">
-        
+
         <ul class="tab-group">
           <li class="tab active"><a href="#addCourse">Add Course</a></li>
           <li class="tab "><a href="#signup">Sign Up</a></li>
         </ul>
-        
+
         <div class="tab-content">
 
           <div id="addCourse">
                 <h1>Create New Course</h1>
 
-                <form id="addForm" method="POST">
+                <form action="create_course.php" id="addForm" method="POST"  enctype='multipart/form-data'>
                   <div class="field-wrap" id= "deptDiv">
                     <label id="deptText">
                       Department<span class="req">*</span>
@@ -131,14 +84,14 @@
                       </div>
                   </div>
 
-               
+
 
                   <div class="top-row">
                     <div class="field-wrap" id= "professorfirstNameDiv">
                       <label>
                         Professor First Name<span class="req">*</span>
                       </label>
-                      <input type="text" id = "professorFirstName" name="professorfirstName" autocomplete="off" />
+                      <input type="text" id = "professorFirstName" name="professorFirstName" autocomplete="off" />
                     </div>
 
                     <div class="field-wrap" id= "professorLastNameDiv">
@@ -156,8 +109,8 @@
                       </label>
                       <select id="days" name="days" class="formDropDown" required>
                         <option style="display:none"></option>
-                        <option value="M">M/W</option>
-                        <option value="T">T/TH</option>
+                        <option value="M/W">M/W</option>
+                        <option value="T/TH">T/TH</option>
                       </select>
                     </div>
 
@@ -178,11 +131,10 @@
                   </div>
 
                   <div class="field-wrap">
-                    <label id="locationLabel">
-                      Class Location<span class="req">*</span>
-                    </label>
-                    <input type="text" id="classLocation" name="classLocation" autocomplete="off"/>
-                    </select>
+                      <label id="courseNameLabel">
+                      Location <span class="req">*</span>
+                      </label>
+                      <input type="text" id="classLocation" name="location" autocomplete="off"/>
                   </div>
 
                   <div class="field-wrap">
@@ -200,25 +152,25 @@
                     <label id="textbookLabel">
                       Textbook<span class="req">*</span>
                     </label>
-                      <input type="file" name="pic" accept="image/*">
+                      <input id = "textbookSrc" name = "textbookSrc" type="file" accept="image/*">
                   </div>
 
                   <div class="field-wrap">
                     <label id="seatsLabel">
                       Total Seats<span class="req">*</span>
                     </label>
-                    <input type="text" id="classSeats" name="classSeats" autocomplete="off"/>
+                    <input type="text" id="seats" name="seats" autocomplete="off"/>
                   </div>
 
-                    <button id = "createClassButton" class="button button-block" value="Add Class" onclick = "addClass()"/>Add Class</button>
+                    <button id="createClassButton" type="submit" class="accountButton button button-block"/>Create Class</button>
 
                 </form>
                 </div>
-          
 
-          <div id="signup">   
+
+          <div id="signup">
             <h1>Register An Account</h1>
-            
+
             <form id="signupForm" method="POST" action="signup.php">
 
               <div class="top-row">
@@ -244,7 +196,7 @@
                   </select>
                 </div>
               </div>
-            
+
               <div class="top-row">
                 <div class="field-wrap" id= "firstNameDiv">
                   <label>
@@ -252,7 +204,7 @@
                   </label>
                   <input class="credentialInput" type="text" name="firstName" autocomplete="off" />
                 </div>
-            
+
                 <div class="field-wrap" id= "lastNameDiv">
                   <label>
                     Last Name<span class="req">*</span>
@@ -274,22 +226,22 @@
                 </label>
                 <input type="text" class="credentialInput" id="usernameInput" name="username" autocomplete="off"/>
               </div>
-              
+
               <div class="field-wrap">
                 <label id="passwordLabel">
                   Password<span class="req">*</span>
                 </label>
                 <input class="credentialInput" type="password" name="password" autocomplete="off"/>
               </div>
-              
+
               <button id="createButton" type="submit" class="accountButton button button-block"/>Create Account</button>
-            
+
             </form>
 
           </div>
-          
+
         </div><!-- tab-content -->
-        
+
     </div> <!-- /form -->
 
   </body>

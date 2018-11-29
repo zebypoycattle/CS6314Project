@@ -205,6 +205,7 @@ $page = $_GET['page'];
                 INNER JOIN professor p ON p.PID = cp.PID
                 INNER JOIN term t ON t.Semester = c.Semester AND t.Year = c.Year
                 INNER JOIN department d ON c.DID = d.DID
+                INNER JOIN textbook tb ON c.CID = tb.CID
                 WHERE ";
 
         if($name != "")
@@ -245,13 +246,13 @@ $page = $_GET['page'];
         }
         $sql .= " AND t.currentTermToRegister = 1";
         $sql .= " AND c.IsDeleted = 0";
-        $sql .= " order by section asc";
+        $sql .= " order by CNumber asc, Section asc";
 
         $result = mysqli_query($conn, $sql);
 
         //Start Paging
 
-        $rowsPerPage = 2;
+        $rowsPerPage = 3;
         if($page=="" || $page =='1')
         {
           $pageStart = 0;
@@ -288,7 +289,16 @@ $page = $_GET['page'];
           $CID = $row["CID"];
           echo "<tr><td>". $row['DName']."</td><td>". $row['CNumber']. "</td><td>" . $row['Section'] . "</td><td>" . $row['CName'] . "</td><td>" . $row['FName'] . " " . $row['LName']. "</td>";
           echo "<td>" . $row['Day'] . " " . $row['Time']. "</td><td>" . $row['Location']. "</td>";
-          echo "<td><a href = 'show_textbook_image.php?CID=$CID'><img style = 'width: 50px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
+
+          if($row['Src'] == 'None' || $row['Src']=='')
+          {
+            echo "<td>No Textbook Uploaded</td>";
+          }
+          else
+          {
+            echo "<td><a href = 'show_textbook_image.php?CID=$CID'><img style = 'width: 60px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
+          }
+
           if($row['Quota'] == $row['EnrolledSeats'])
           {
            echo "<td>CLOSED</td>";
