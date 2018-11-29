@@ -161,7 +161,7 @@ $page = $_GET['page'];
       </select>
     </div>
 
-    <button id="searchClassButton" type="submit" class="accountButton button button-block"/>Search</button>
+    <button id="searchClassButton" type="submit" class="button button-block"/>Search</button>
 
   </form>
 
@@ -205,7 +205,7 @@ $page = $_GET['page'];
                 INNER JOIN professor p ON p.PID = cp.PID
                 INNER JOIN term t ON t.Semester = c.Semester AND t.Year = c.Year
                 INNER JOIN department d ON c.DID = d.DID
-                INNER JOIN textbook tb ON c.CID = tb.CID
+                LEFT JOIN textbook tb ON c.CID = tb.CID
                 WHERE ";
 
         if($name != "")

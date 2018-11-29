@@ -61,7 +61,7 @@ while($row = mysqli_fetch_array($result))
     <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <!--<script src="js/home.js"></script>-->
+    <script src="js/home.js"></script>
 
 
   </head>
@@ -213,7 +213,7 @@ while($row = mysqli_fetch_array($result))
                     <input type="text" id="classSeats" name="classSeats" value = "<?php echo $seats; ?>" autocomplete="off"/>
                   </div>
 
-                    <button id="updateClassButton" type="submit" class="accountButton button button-block"/>Update Class</button>
+                    <button id="updateClassButton" type="submit" class="button button-block"/>Update Class</button>
 
                 </form>
 
