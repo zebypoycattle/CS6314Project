@@ -48,8 +48,8 @@ $conn = mysqli_connect(
 
 if (!$conn){
 
-	echo "Connection failed!";
-	exit;
+  echo "Connection failed!";
+  exit;
 }
 
 
@@ -126,11 +126,11 @@ while($row = mysqli_fetch_array($result))
 {
   $CID = $row["CID"];
 
-	echo "<tr><td>".$row["DName"]."</td><td>".$row["CNumber"]."</td><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Day"]. "</td><td>".$row["Time"]."</td><td>". $row["Location"]. "</td>";
+  echo "<tr><td>".$row["DName"]."</td><td>".$row["CNumber"]."</td><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Day"]. "</td><td>".$row["Time"]."</td><td>". $row["Location"]. "</td>";
 
   echo "<td><a href = 'image$CID.html'><img style = 'width: 50px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
 
-  if($row["OpenSeats"]==0)
+  if($row["Quota"] === $row["EnrolledSeats"])
   {
     echo "<td>FULL</td>";
   }
@@ -139,15 +139,12 @@ while($row = mysqli_fetch_array($result))
     echo "<td>OPEN</td>";
   }
 
-
-
-
   if($accountType == 'student')
   {
-    echo "<td> <button onclick='enroll($CID)'>Enroll</button> </td>";
-    echo "<td> <button onclick='remove_from_cart($CID)'>Remove</button> </td></tr>";
+    echo "<td> <button onclick='enroll($CID)'>Enroll</button></td>";
+    echo "<td> <button onclick='remove_from_cart($CID)'>Remove</button></td>";
   }
-
+  echo "</tr>";
 }
 
 echo "</table>";
