@@ -53,10 +53,9 @@ $hash = password_hash($pwd, PASSWORD_DEFAULT);
 $registerAccount = "INSERT INTO user(Username, Category, Pwd, Fname, LName, Email) VALUES ('$username', '$category', '$hash', '$firstName', '$lastName', '$email')";
 mysqli_query($conn, $registerAccount);
 mysqli_close();
-echo "Account successfully created.";
+
 $message = "Account successfully created.";
-echo "<script type='text/javascript'>alert('$message');</script>";
-header("Location: home.php");
+header("Location: home.php?message=" .urlencode($message));
 
 
 

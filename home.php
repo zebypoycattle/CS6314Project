@@ -1,4 +1,8 @@
 <?php
+if (isset($_GET['message'])) {
+    print '<script type="text/javascript">alert("' . $_GET['message'] . '");</script>';
+}
+
 session_start();
 
  $username = $_SESSION['username'];
@@ -11,12 +15,60 @@ session_start();
 		<meta charset="UTF-8">
     	<title>Home Page</title>
     	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     	<link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
     	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
     	<link rel="stylesheet" href="css/style.css">
     	<link rel="stylesheet" href="css/navbar.css">
+      <script type="text/javascript">
+        function showData () {
+
+          if (window.XMLHttpRequest) {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+            xmlhttp = new XMLHttpRequest();
+          }
+          else {
+                // code for IE6, IE5
+            xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange = function()
+          {
+              if (this.readyState == 4 && this.status == 200){
+                  document.getElementById("cart_results").innerHTML = this.responseText;
+              }
+          };
+
+          var http = "enrolledClasses.php";
+
+          xmlhttp.open("GET",http,true);
+          xmlhttp.send();
+        }
+        function unenroll(CID) {
+          if (window.XMLHttpRequest)
+          {
+                // code for IE7+, Firefox, Chrome, Opera, Safari
+              xmlhttp = new XMLHttpRequest();
+          }
+          else
+          {
+                // code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+          xmlhttp.onreadystatechange = function()
+          {
+              if (this.readyState == 4 && this.status == 200)
+              {
+                var test = this.responseText;
+                alert(test);
+              }
+          };
+          var http = "unenroll.php?CID="+CID;
+          xmlhttp.open("GET",http,true);
+          xmlhttp.send();
+          location.reload();
+          showData();
+        }
+    </script>
 	</head>
 	<body>
 		<div class="topnav">

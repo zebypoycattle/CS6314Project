@@ -7,6 +7,7 @@ if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == ''))
   exit();
 }
 
+
 //Get parameters
 $SID = $_SESSION["SID"];
 $CID = $_GET["CID"];
@@ -50,9 +51,7 @@ $row = mysqli_fetch_array($sql);
 $newEnrollmentTotal = (int) $row["EnrolledSeats"] - 1;
 
 $sql = "UPDATE course SET EnrolledSeats = '$newEnrollmentTotal' WHERE CID = $CID";
-if ($conn->query($sql) === TRUE)
-{
-  echo "Unenrolled from course!";
+if ($conn->query($sql) === TRUE){
 }
 else
 {
