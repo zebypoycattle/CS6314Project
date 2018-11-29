@@ -112,8 +112,9 @@ else
   echo "Error: " . $sql . "<br>" . $conn->error;
 }
 
-
-header("Location: home.php");
+mysqli_close();
+$message = "Account successfully created.";
+header("Location: home.php?message=" .urlencode($message));
 
 
 ?>

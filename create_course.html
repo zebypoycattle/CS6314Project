@@ -41,16 +41,14 @@
       {
           if (this.readyState == 4 && this.status == 200)
           {
-              var test = this.responseText;
-              alert(test);
-
-              window.location.replace("courses_page.php");
+            
+              window.location.replace("home.php");
           }
       };
       var http = "create_course.php?className=" + className +"&department="+dept+"&courseNumber="+courseNumber+"&sectionNumber="+sectionNumber+"&term="+term+"&year="+year+"&professorFirstName="+professorFirstName+"&professorLastName="+professorLastName+"&days="+days+"&time="+time+"&level="+level+"&location="+location+"&seats="+seats;
       xmlhttp.open("GET",http,true);
       xmlhttp.send();
-      //alert("Course Added Successsfully");
+      alert("Course added successsfully.");
 
 
 
@@ -183,10 +181,7 @@
                     <label id="locationLabel">
                       Class Location<span class="req">*</span>
                     </label>
-                    <select id="classLocation" name="classLocation" class="formDropDown" required>
-                      <option style="display:none"></option>
-                      <option value="Online">Online</option>
-                      <option value="On Campus">On Campus</option>
+                    <input type="text" id="classLocation" name="classLocation" autocomplete="off"/>
                     </select>
                   </div>
 
