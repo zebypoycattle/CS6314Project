@@ -264,13 +264,6 @@ $page = $_GET['page'];
         $numRows = mysqli_num_rows($result);
         $numPages = ceil($numRows/$rowsPerPage);
 
-        echo "Page ";
-        for($n = 1; $n<=$numPages; $n++)
-        {
-          echo "<a href = 'courses_page.php?name=$name&section=$section&level=$level&location=$location&page=$n#class_results'>$n</a>";
-        }
-
-
         //Get new page
         $sql .= " limit $pageStart, $rowsPerPage";
         $result = mysqli_query($conn, $sql);
@@ -322,6 +315,14 @@ $page = $_GET['page'];
           }
         }
         echo "</table>";
+
+        //Page links
+        echo "<div id = 'divPage' style = 'text-align: center;'>Page";
+        for($n = 1; $n<=$numPages; $n++)
+        {
+          echo "<a href = 'courses_page.php?name=$name&section=$section&level=$level&location=$location&page=$n#class_results'> $n </a>";
+        }
+        echo "</div>";
         mysqli_close($conn);
       }
 
