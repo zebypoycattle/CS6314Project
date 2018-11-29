@@ -112,16 +112,23 @@ session_start();
       <ul>
         <?php
 
-          if($accountType!= 'student')
-          {
-            echo  "<li><a href='create_course.html'>Add New Courses or Accounts</a></li>";
+          if($accountType!= 'student') {
+            echo  "<li><a href='create_course.html'>Click here to add new courses or register new accounts.</a></li>";
+            echo  "<li>Click on the History tab to see all previous coursework.</li>";
+            echo  "<li>Click on the Courses tab to search, edit, and delete courses.</li>";
+            echo  "<li>Click on the Favorites tab to see courses currently favorited by students.</li>";
+            echo  "<li>Click on the Enroll tab to see the current enrollment of all courses.</li>";
+          }
+          else {
+            echo  "<li>Click on the History tab to see your previous coursework.</li>";
+            echo  "<li>Click on the Courses tab to search for courses.</li>";
+            echo  "<li>Click on the Favorites tab to see your favorited courses.</li>";
+            echo  "<li>Click on the Enroll tab to arrange your cart and enroll in your courses.</li>";
           }
 
+
         ?>
-        <li>Click on the History tab to see your previous coursework.</li>
-        <li>Click on the Courses tab to search for courses.</li>
-        <li>Click on the Favorites tab to see your favorited courses.</li>
-        <li>Click on the Enroll tab to arrange your cart and enroll in your courses.</li>
+  
       </ul>
       <div>
       <?php
