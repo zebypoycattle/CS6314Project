@@ -104,13 +104,13 @@
 
 </script>
 
-	<meta charset="utf-8">
+  <meta charset="utf-8">
   <link href='https://fonts.googleapis.com/css?family=Titillium+Web:400,300,600' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/navbar.css">
-	<title>Favorites</title>
+  <title>Favorites</title>
 </head>
 
 <body>
@@ -170,6 +170,6 @@
 
   <div id = "favorites_results">
   </div>
-
+  <script>window.onload = showData();</script>
 </body>
 </html>
