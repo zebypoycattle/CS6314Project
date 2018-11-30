@@ -55,7 +55,10 @@ mysqli_query($conn, $registerAccount);
 mysqli_close();
 
 $message = "Account successfully created.";
-header("Location: home.php?message=" .urlencode($message));
+    echo "<SCRIPT type='text/javascript'>
+        alert('$message');
+        window.location.replace(\"create_course.html\");
+    </SCRIPT>";   
 
 
 

@@ -1,8 +1,4 @@
 <?php
-if (isset($_GET['message'])) {
-    print '<script type="text/javascript">alert("' . $_GET['message'] . '");</script>';
-}
-
 session_start();
 
  $username = $_SESSION['username'];
@@ -65,7 +61,6 @@ session_start();
           var http = "unenroll.php?CID="+CID;
           xmlhttp.open("GET",http,true);
           xmlhttp.send();
-          location.reload();
           showData();
         }
     </script>
