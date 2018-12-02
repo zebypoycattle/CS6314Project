@@ -7,9 +7,9 @@ if(!isset($_SESSION['username']) || (trim($_SESSION['username']) == ''))
   exit();
 }
 
-$CID = $_GET["CID"];
+$Src = $_GET["Src"];
 
-echo "<img src= 'images/$CID.jpg'>";
+echo "<img src= 'images/$Src'>";
 
 exit();
 

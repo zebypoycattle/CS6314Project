@@ -58,6 +58,7 @@ $sql = "SELECT * FROM course c
         INNER JOIN professor p ON p.PID = cp.PID
         INNER JOIN cart ca ON ca.CID = c.CID
         INNER JOIN department d ON c.DID = d.DID
+        INNER JOIN textbook tb ON tb.CID = c.CID
         WHERE ";
 
 if($SID != "")
@@ -119,16 +120,17 @@ if($accountType == 'student')
   echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Enroll</td><td>Remove From Cart</td></tr>";
 }
 else {
-  echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td></tr>"; 
+  echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td></tr>";
 }
 
 while($row = mysqli_fetch_array($result))
 {
   $CID = $row["CID"];
+  $Src = $row["Src"];
 
   echo "<tr><td>".$row["DName"]."</td><td>".$row["CNumber"]."</td><td>". $row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Day"]. "</td><td>".$row["Time"]."</td><td>". $row["Location"]. "</td>";
 
-  echo "<td><a href = 'image$CID.html'><img style = 'width: 50px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
+  echo "<td><a href = 'show_textbook_image.php?Src=$Src'><img style = 'width: 60px; height: 75px;' src= 'images/$Src'></a></td>";
 
   if($row["Quota"] === $row["EnrolledSeats"])
   {

@@ -161,7 +161,7 @@ while($row = mysqli_fetch_array($result))
                       <select class="formDropDown" id="days" name="days" required>
                         <option style="display:none"></option>
                         <option value="M/W" <?php if($days == 'M/W'){echo "selected ";}?> >M/W</option>
-                        <option value="T/TH" <?php if($days == 'T/TH'){echo "selected ";}?> >T/Th</option>
+                        <option value="T/TH" <?php if($days == 'T/TH'){echo "selected ";}?> >T/TH</option>
                       </select>
                     </div>
 

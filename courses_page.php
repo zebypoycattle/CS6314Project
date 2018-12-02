@@ -137,7 +137,7 @@ $page = $_GET['page'];
       <input type = "text" id = "name_select" name = "name" value = <?php echo $name;?>>
     </div>
     <div class="field-wrap">
-      <label for="class_section">Class Section </label>
+      <label for="class_section">Class Number </label>
       <input type = "text" id = "section_select" name = "section" value = <?php echo $section;?>>
     </div>
 
@@ -156,7 +156,7 @@ $page = $_GET['page'];
       <select class="formDropDown" id = "location_select" name = "location">
         <option value="any" style="display:none"></option>
         <option value="any" >Any Location</option>
-        <option value="oncampus" <?php if($location =='on+campus'){echo "selected ";}?> >On Campus</option>
+        <option value="oncampus" <?php if($location =='oncampus'){echo "selected ";}?> >On Campus</option>
         <option value="online" <?php if($location == 'online'){echo "selected ";}?> >Online</option>
       </select>
     </div>
@@ -173,14 +173,17 @@ $page = $_GET['page'];
 
   <div id = "class_results">
     <?php
-
-      if(isset($_GET['name']))
+      if(isset($_GET['location']))
       {
         $name = $_GET['name'];
         $section = $_GET['section'];
         $level = $_GET['level'];
         $location = $_GET['location'];
         $page = $_GET['page'];
+        if($page =='')
+        {
+          $page = 1;
+        }
 
         $user = 'root';
         $password = 'root';
@@ -252,7 +255,7 @@ $page = $_GET['page'];
 
         //Start Paging
 
-        $rowsPerPage = 3;
+        $rowsPerPage = 5;
         if($page=="" || $page =='1')
         {
           $pageStart = 0;
@@ -268,28 +271,28 @@ $page = $_GET['page'];
         $sql .= " limit $pageStart, $rowsPerPage";
         $result = mysqli_query($conn, $sql);
 
-
         if($accountType == 'student')
         {
-          echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td><td>Add To Cart</td></tr>";
+          echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td><td>Add To Cart</td></tr>";
         }
         else
         {
-          echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
+          echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
         }
         while($row = mysqli_fetch_array($result))
         {
           $CID = $row["CID"];
+          $Src = $row["Src"];
           echo "<tr><td>". $row['DName']."</td><td>". $row['CNumber']. "</td><td>" . $row['Section'] . "</td><td>" . $row['CName'] . "</td><td>" . $row['FName'] . " " . $row['LName']. "</td>";
           echo "<td>" . $row['Day'] . " " . $row['Time']. "</td><td>" . $row['Location']. "</td>";
 
-          if($row['Src'] == 'None' || $row['Src']=='')
+          if($row['Src'] == 'None' || $row['Src']== '')
           {
             echo "<td>No Textbook Uploaded</td>";
           }
           else
           {
-            echo "<td><a href = 'show_textbook_image.php?CID=$CID'><img style = 'width: 60px; height: 75px;' src= 'images/$CID.jpg'></a></td>";
+            echo "<td><a href = 'show_textbook_image.php?Src=$Src'><img style = 'width: 60px; height: 75px;' src= 'images/$Src'></a></td>";
           }
 
           if($row['Quota'] == $row['EnrolledSeats'])
@@ -308,23 +311,36 @@ $page = $_GET['page'];
           }
           else
           {
-           echo "<td> <form action='edit_course.php?CID=$CID' method='post'><input type='submit' value='Edit'></form></td>";
-           echo "<td> <button onclick='delete_course($CID)'>Delete</button> </td>";
+           echo "<td> <form action='edit_course.php?CID=$CID' method='post'><button id='editClassButton' type='submit' class='button button-block'/>Edit</button></form></td>";
+           echo "<td> <button onclick='delete_course($CID)' class='button button-block' >Delete</button></td>";
            echo "</tr>";
 
           }
         }
         echo "</table>";
 
-        //Page links
-        echo "<div id = 'divPage' style = 'text-align: center;'>Page";
-        for($n = 1; $n<=$numPages; $n++)
+
+        if($numRows != 0)
         {
-          echo "<a href = 'courses_page.php?name=$name&section=$section&level=$level&location=$location&page=$n#class_results'> $n </a>";
+          //Page links
+          echo "<div id = 'divPage' style = 'text-align: center;'>Page";
+          $name = preg_replace("/[\s_]/", "%20", $name);
+          for($n = 1; $n<=$numPages; $n++)
+          {
+            if($page == $n || ($page =='' && $n==1))
+            {
+            echo "<a style= 'color:red;' href = 'courses_page.php?name=$name&section=$section&level=$level&location=$location&page=$n#class_results'> $n </a>";
+            }
+            else {
+              echo "<a href = 'courses_page.php?name=$name&section=$section&level=$level&location=$location&page=$n#class_results'> $n </a>";
+            }
+          }
+          echo "</div>";
         }
-        echo "</div>";
-        mysqli_close($conn);
+
       }
+
+
 
 
     ?>

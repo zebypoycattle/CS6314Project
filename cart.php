@@ -138,7 +138,7 @@
       <input type = "text" id = "name_select">
     </div>
     <div class="field-wrap">
-      <label for="class_section">Class Section </label>
+      <label for="class_section">Class Number </label>
       <input type = "text" id = "section_select">
     </div>
 
