@@ -48,9 +48,8 @@ else
       $result = mysqli_query($conn, $sql);
 
 
-      
+       echo "<br><br>";
       if(mysqli_num_rows($result) > 0) {
-        echo "<br><br>";
         echo "<h1>Upcoming Semester Enrollment</h1>";
         echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section</td><td>Course Name</td><td>Semester</td><td>Year</td><td>Day</td><td>Time</td><td>Location</td><td>Level</td><td>Un-Enroll From Class</td></tr>";
         
@@ -62,6 +61,8 @@ else
         }
         echo "</table>";
       }
+      else {
+        echo "<h1>Be sure to register for courses next semester!</h1>";      }
       
       mysqli_close();
     }
