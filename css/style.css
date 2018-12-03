@@ -183,4 +183,7 @@ textarea {
   display: inline-block;
 }
 
+.hideFirstElement {
+  display: none;
+}
 
