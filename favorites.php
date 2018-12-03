@@ -144,7 +144,7 @@
     <div class="field-wrap">
       <label for="class_level">Class Level </label>
       <select class="formDropDown" id = "level_select">
-        <option value="any" style="display:none"></option>
+        <option value="any" class="hideFirstElement"></option>
         <option value="any">Any Level</option>
         <option value="undergraduate">Undergraduate</option>
         <option value="graduate">Graduate</option>
@@ -154,7 +154,7 @@
     <div class="field-wrap">
       <label  for="class_location">Class Location </label>
       <select class="formDropDown" id = "location_select">
-        <option value="any" style="display:none"></option>
+        <option value="any" class="hideFirstElement"></option>
         <option value="any">Any Location</option>
         <option value="on campus">On Campus</option>
         <option value="online">Online</option>

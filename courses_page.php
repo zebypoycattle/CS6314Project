@@ -144,7 +144,7 @@ $page = $_GET['page'];
     <div class="field-wrap">
       <label for="class_level">Class Level </label>
       <select class="formDropDown" id = "level_select" name = "level">
-        <option value="any" style="display:none"></option>
+        <option value="any" class="hideFirstElement"></option>
         <option value="any"  >Any Level</option>
         <option value="undergraduate" <?php if($level == 'Undergraduate'){echo "selected ";}?> >Undergraduate</option>
         <option value="graduate" <?php if($level== 'Graduate'){echo "selected ";}?> >Graduate</option>
@@ -154,7 +154,7 @@ $page = $_GET['page'];
     <div class="field-wrap">
       <label  for="class_location">Class Location </label>
       <select class="formDropDown" id = "location_select" name = "location">
-        <option value="any" style="display:none"></option>
+        <option value="any" class="hideFirstElement"></option>
         <option value="any" >Any Location</option>
         <option value="oncampus" <?php if($location =='oncampus'){echo "selected ";}?> >On Campus</option>
         <option value="online" <?php if($location == 'online'){echo "selected ";}?> >Online</option>
@@ -273,11 +273,11 @@ $page = $_GET['page'];
 
         if($accountType == 'student')
         {
-          echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td><td>Add To Cart</td></tr>";
+          echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td><td>Add To Cart</td></tr>";
         }
         else
         {
-          echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
+          echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
         }
         while($row = mysqli_fetch_array($result))
         {
