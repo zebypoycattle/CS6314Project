@@ -292,7 +292,7 @@ $page = $_GET['page'];
           }
           else
           {
-            echo "<td><a href = 'show_textbook_image.php?Src=$Src'><img style = 'width: 60px; height: 75px;' src= 'images/$Src'></a></td>";
+            echo "<td><a href = 'show_textbook_image.php?CID=$CID&Src=$Src&isCourseSearch=1'><img style = 'width: 60px; height: 75px;' src= 'images/$Src'></a></td>";
           }
 
           if($row['Quota'] == $row['EnrolledSeats'])
