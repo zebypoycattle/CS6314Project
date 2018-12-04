@@ -121,7 +121,7 @@ if($accountType == 'student')
   echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Cart</td><td>Remove From Favorites</td></tr>";
 }
 else {
-   echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Number of Times Favorites</td></tr>";
+   echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td></tr>";
 }
 
 while($row = mysqli_fetch_array($result))
@@ -148,9 +148,9 @@ while($row = mysqli_fetch_array($result))
   if($accountType == 'student')
   {
     echo "<td> <button onclick='add_to_cart($CID)'>Add</button> </td>";
-    echo "<td> <button onclick='remove_from_favorites($CID)'>Remove</button> </td></tr>";
+    echo "<td> <button onclick='remove_from_favorites($CID)'>Remove</button> </td>";
   }
-
+  echo "</tr>";
 }
 
 echo "</table>";

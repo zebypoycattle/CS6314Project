@@ -38,6 +38,10 @@ $sql = "SELECT * FROM Cart WHERE SID=" . $SID . " AND CID=" . $CID;
 $result = mysqli_query($conn, $sql);
 $row_cnt = $result->num_rows;
 
+$sql = "SELECT * FROM favorites WHERE SID=" . $SID . " AND CID=" . $CID;
+$result = mysqli_query($conn, $sql);
+$row_cnt2 = $result->num_rows;
+
 //Check to see if this class already in cart
 if($row_cnt == 1)
 {
@@ -57,14 +61,16 @@ else
     echo "Error: " . $sql . "<br>" . $conn->error;
   }
 
-  $sql = "DELETE FROM favorites WHERE SID = $SID and CID = $CID";
+  if ($row_cnt2 == 1) {
+    $sql = "DELETE FROM favorites WHERE SID = $SID and CID = $CID";
 
-  if ($conn->query($sql) === TRUE)
-  {
-    echo "Course No Longer in Favorites!";
-  }
-  else {
-    echo "Error: " . $sql . "<br>" . $conn->error;
+    if ($conn->query($sql) === TRUE)
+    {
+      echo "Course No Longer in Favorites!";
+    }
+    else {
+      echo "Error: " . $sql . "<br>" . $conn->error;
+    }
   }
 }
 
