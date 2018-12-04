@@ -82,7 +82,7 @@ while($row = mysqli_fetch_array($result))
                       Department<span class="req">*</span>
                     </label>
                     <select id="department" name="department" class="formDropDown" required>
-                      <option class="hideFirstElement"></option>
+                      <option style="display:none"></option>
                       <option value="1"<?php if($dept == '1'){echo "selected ";}?>>Computer Science</option>
                       <option value="2"<?php if($dept == '2'){echo "selected ";}?>>Software Engineering</option>
                     </select>
@@ -118,7 +118,7 @@ while($row = mysqli_fetch_array($result))
                         Term<span class="req">*</span>
                       </label>
                       <select class="formDropDown" id="classTerm" name="term" required>
-                        <option class="hideFirstElement"></option>
+                        <option style="display:none"></option>
                         <option value="Spring" <?php if($term == 'Spring'){echo "selected ";}?> >Spring</option>
                         <option value="Summer" <?php if($term == 'Summer'){echo "selected ";}?> >Summer</option>
                         <option value="Fall" <?php if($term == 'Fall'){echo "selected ";}?> >Fall</option>
@@ -130,7 +130,7 @@ while($row = mysqli_fetch_array($result))
                           Year<span class="req">*</span>
                         </label>
                         <select id="yearTerm" class="formDropDown" name="year" required>
-                          <option class="hideFirstElement"></option>
+                          <option style="display:none"></option>
                           <option value="2019" <?php if($year == '2019'){echo "selected ";}?> >2019</option>
                           <option value="2020" <?php if($year == '2020'){echo "selected ";}?> >2020</option>
                         </select>
@@ -159,7 +159,7 @@ while($row = mysqli_fetch_array($result))
                         Days<span class="req">*</span>
                       </label>
                       <select class="formDropDown" id="days" name="days" required>
-                        <option class="hideFirstElement"></option>
+                        <option style="display:none"></option>
                         <option value="M/W" <?php if($days == 'M/W'){echo "selected ";}?> >M/W</option>
                         <option value="T/TH" <?php if($days == 'T/TH'){echo "selected ";}?> >T/TH</option>
                       </select>
@@ -170,7 +170,7 @@ while($row = mysqli_fetch_array($result))
                         Time<span class="req">*</span>
                       </label>
                       <select class="formDropDown" id="time" name="time" required>
-                        <option class="hideFirstElement"></option>
+                        <option style="display:none"></option>
                         <option value="8:30am-9:45am" <?php if($time == '8:30am-9:45am'){echo "selected ";}?> >8:30am-9:45am</option>
                         <option value="10:00am-11:15am" <?php if($time == '10:00am-11:15am'){echo "selected ";}?> >10:00am-11:15am</option>
                         <option value="11:30am-12:45pm" <?php if($time == '11:30am-12:45pm'){echo "selected ";}?> >11:30am-12:45pm</option>
@@ -193,7 +193,7 @@ while($row = mysqli_fetch_array($result))
                       Level<span class="req">*</span>
                     </label>
                     <select class="formDropDown" id="classLevel" name="level" required>
-                      <option class="hideFirstElement"></option>
+                      <option style="display:none"></option>
                       <option value="Undergraduate" <?php if($level == 'Undergraduate'){echo "selected ";}?> >Undergraduate</option>
                       <option value="Graduate" <?php if($level == 'Graduate'){echo "selected ";}?> >Graduate</option>
                     </select>

@@ -34,9 +34,11 @@ $message = "";
 
 if (!$conn){
 
-	echo "Connection failed!";
+	$message.= "Connection failed!";
 	exit();
 }
+
+
 
 //Check if section exists already
 //Check if professor teaches a section at this schedule already
@@ -54,7 +56,7 @@ if($row_cnt == 0)
           VALUES ('$DID', '$professorFirstName', '$professorLastName', '$professorFirstName$professorLastName@utdallas.edu')";
   if ($conn->query($sql) === TRUE)
   {
-    $message.= "New Professor Added Successfully\n";
+    $message.= "New Professor Added Successfully\\n";
   }
   else
   {
@@ -68,7 +70,7 @@ $sql = "UPDATE course
         WHERE CID = $CID";
 
 if ($conn->query($sql) === TRUE) {
-    $message.= "Course updated successfully\n";
+    $message.= "Course Updated Successfully\\n";
 } else {
     $message.= "Error updating record: " . $conn->error;
   }
@@ -90,7 +92,7 @@ if ($conn->query($sql) === TRUE) {
 
   if ($conn->query($sql) === TRUE)
   {
-    $message.= "Course_Professor Updated Successfully\n";
+    $message.= "Course Professor Updated Successfully\\n";
   }
   else
   {
@@ -105,35 +107,48 @@ if ($conn->query($sql) === TRUE) {
   else
   {
 
-    $filename = "images" . "/" . $CID . ".jpg";
+    $sql = "SELECT Src
+            FROM textbook
+            WHERE CID = $CID";
+
+    $result = mysqli_query($conn, $sql);
+    while($row = mysqli_fetch_array($result))
+    {
+        $Src= $row["Src"];
+    }
+
+    $filename = "images" . "/" . $Src;
+
     if (file_exists($filename))
     {
         unlink($filename);
     }
 
     $tmp_name = $_FILES["textbookSrc"]["tmp_name"];
-    $newImagePath = $CID.".jpg";
+    $name = $_FILES["textbookSrc"]["name"];
 
     $sql = "UPDATE textbook
-            SET Src = '$newImagePath'
+            SET Src = '$name'
             WHERE CID = $CID";
+
+
 
     if ($conn->query($sql) === TRUE)
     {
-      echo "Textbook updated Successfully\n";
+      $message.= "Textbook updated Successfully\\n";
     }
     else
     {
-      echo "Error: " . $sql . "<br>" . $conn->error;
+      $message.= "Error: " . $sql . "<br>" . $conn->error;
     }
 
-    move_uploaded_file($tmp_name, "images"."/".$newImagePath);
+    move_uploaded_file($tmp_name, "images"."/".$name);
   }
 
-
-  echo "<script type='text/javascript'>alert($message);</script>";
-  header("Location: courses_page.php#class_results");
   mysqli_close();
-
+  echo "<SCRIPT type='text/javascript'>
+      alert('$message');
+      window.location.replace('courses_page.php?name=&section=&level=any&location=any#class_results');
+  </SCRIPT>";
 
 ?>
