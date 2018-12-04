@@ -66,7 +66,6 @@
     xmlhttp.open("GET",http,true);
     xmlhttp.send();
 
-    location.reload();
     showData();
   }
 
@@ -98,7 +97,6 @@
     xmlhttp.open("GET",http,true);
     xmlhttp.send();
 
-    location.reload();
     showData();
   }
 

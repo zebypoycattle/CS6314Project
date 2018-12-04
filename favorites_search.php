@@ -118,10 +118,10 @@ $result = mysqli_query($conn, $sql);
 
 if($accountType == 'student')
 {
-  echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Cart</td><td>Remove From Favorites</td></tr>";
+  echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Cart</td><td>Remove From Favorites</td></tr>";
 }
 else {
-   echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td></tr>";
+   echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td></tr>";
 }
 
 while($row = mysqli_fetch_array($result))
@@ -131,17 +131,23 @@ while($row = mysqli_fetch_array($result))
 
 	echo "<tr><td>". $row["DName"]."</td><td>".$row["CNumber"]."</td><td>".$row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Day"]."</td><td>".$row["Time"]. "</td><td>". $row["Location"]. "</td>";
 
-  echo "<td><a href = 'show_textbook_image.php?Src=$Src'><img style = 'width: 60px; height: 75px;' src= 'images/$Src'></a></td>";
+   if($row['Src'] == 'None' || $row['Src']== '')
+          {
+            echo "<td>No Textbook Uploaded</td>";
+      }
+    else
+    {
+      echo "<td><a href = 'show_textbook_image.php?Src=$Src'><img style = 'width: 60px; height: 75px;' src= 'images/$Src'></a></td>";
+    }
 
-  if($row["OpenSeats"]==0)
-  {
-    echo "<td>FULL</td>";
-  }
+   if($row['Quota'] == $row['EnrolledSeats'])
+   {
+    echo "<td>CLOSED</td>";
+   }
   else
   {
-    echo "<td>OPEN</td>";
+    echo "<td>". $row['EnrolledSeats']. "/" . $row['Quota']. "</td>";
   }
-
 
 
 

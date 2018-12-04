@@ -98,7 +98,6 @@
     xmlhttp.open("GET",http,true);
     xmlhttp.send();
 
-    location.reload();
     showData();
   }
 
