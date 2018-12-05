@@ -114,20 +114,20 @@ $page = $_GET['page'];
 </head>
 
 <body>
-
-  <div class="topnav">
-      <a class="active" href="home.php">Home</a>
-      <a href="history.php">History</a>
-      <a href="courses_page.php">Courses</a>
-      <a href="favorites.php">Favorites</a>
-      <a href="cart.php">Enroll</a>
-      <div class="topnav-right">
-        <a href="logout.php">Logout</a>
-      </div>
+    <div class="topnav" id="top">
+        <a class="active" href="home.php">Home</a>
+        <a href="history.php">History</a>
+        <a href="courses_page.php#top">Courses</a>
+        <a href="favorites.php#top">Favorites</a>
+        <a href="cart.php#top">Enroll</a>
+        <div class="topnav-right">
+          <a href="logout.php">Logout</a>
+        </div>
+    </div>
   </div>
 
   <br><br>
-  <div class="form">
+  <div class="form" id="searchCourse">
   <h1> Guided Search </h1>
 
   <form action="courses_page.php#class_results" id="addForm" method="GET"  enctype='multipart/form-data'>
@@ -145,9 +145,9 @@ $page = $_GET['page'];
       <label for="class_level">Class Level </label>
       <select class="formDropDown" id = "level_select" name = "level">
         <option value="any" style="display:none"></option>
-        <option value="any"  >Any Level</option>
-        <option value="undergraduate" <?php if($level == 'Undergraduate'){echo "selected ";}?> >Undergraduate</option>
-        <option value="graduate" <?php if($level== 'Graduate'){echo "selected ";}?> >Graduate</option>
+        <option value="any" <?php if($level =='any'){echo "selected ";}?> >Any Level</option>
+        <option value="undergraduate" <?php if($level == 'undergraduate'){echo "selected ";}?> >Undergraduate</option>
+        <option value="graduate" <?php if($level== 'graduate'){echo "selected ";}?> >Graduate</option>
       </select>
     </div>
 
@@ -155,7 +155,7 @@ $page = $_GET['page'];
       <label  for="class_location">Class Location </label>
       <select class="formDropDown" id = "location_select" name = "location">
         <option value="any" style="display:none"></option>
-        <option value="any" >Any Location</option>
+        <option value="any" <?php if($location =='any'){echo "selected ";}?> >Any Location </option>
         <option value="oncampus" <?php if($location =='oncampus'){echo "selected ";}?> >On Campus</option>
         <option value="online" <?php if($location == 'online'){echo "selected ";}?> >Online</option>
       </select>
@@ -273,11 +273,11 @@ $page = $_GET['page'];
 
         if($accountType == 'student')
         {
-          echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td><td>Add To Cart</td></tr>";
+          echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Favorites</td><td>Add To Cart</td></tr>";
         }
         else
         {
-          echo "<table class='table'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
+          echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Edit</td><td>Delete</td></tr>";
         }
         while($row = mysqli_fetch_array($result))
         {
@@ -337,9 +337,11 @@ $page = $_GET['page'];
           }
           echo "</div>";
         }
+          echo '<script type="text/javascript">';
+          echo "$('#searchCourse').find('input, select, textarea').prev('label').addClass('active')";
+          echo '</script>';
 
       }
-
 
 
 

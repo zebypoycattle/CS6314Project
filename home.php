@@ -38,6 +38,7 @@ session_start();
 
           xmlhttp.open("GET",http,true);
           xmlhttp.send();
+          window.reload();
         }
         function unenroll(CID) {
           if (window.XMLHttpRequest)
@@ -66,12 +67,12 @@ session_start();
     </script>
 	</head>
 	<body>
-		<div class="topnav">
+		<div class="topnav" id="top">
   			<a class="active" href="home.php">Home</a>
         <a href="history.php">History</a>
-  			<a href="courses_page.php">Courses</a>
-  			<a href="favorites.php">Favorites</a>
-  			<a href="cart.php">Enroll</a>
+  			<a href="courses_page.php#top">Courses</a>
+  			<a href="favorites.php#top">Favorites</a>
+  			<a href="cart.php#top">Enroll</a>
   			<div class="topnav-right">
     			<a href="logout.php">Logout</a>
   			</div>
