@@ -65,7 +65,7 @@ $(document).ready(function() {
 
   $('#usernameInput').on('change', function() {
     checkAvailability();
-    if($("#usernameInput").val().length < 5 || $("#usernameInput").val().length > 10) {
+    if($("#usernameInput").val().length < 6 || $("#usernameInput").val().length > 10) {
       $("#usernameLabel").text("Username must be alphanumeric between 6 and 10 characters.");
     }
   });
@@ -89,7 +89,7 @@ $(document).ready(function() {
           $(selector).text("Username must be lowercase alphanumeric between 6 and 10 characters.");
         }
         else if(id === "passwordLabel") {
-          $(selector).text("Password must be at least 8 characters and contain upper and lower case letter and number.");
+          $(selector).text("Password must be between 8 and 15 characters and contain upper and lower case letter and number.");
         }
          
   }
@@ -222,6 +222,10 @@ $(document).ready(function() {
       validPassword = false;
       $(".credentialInput").focus().val("").focus();
     }
+    else if(passwordInput.length < 8 || passwordInput.length > 15) {
+        validPassword = false;
+        $(".credentialInput").focus().val("").focus();
+      }
 
     return validPassword;
   }
