@@ -114,12 +114,12 @@
 <body>
     <div class="topnav" id="top">
         <a class="active" href="home.php">Home</a>
-        <a href="history.php">History</a>
+        <a href="history.php#top">History</a>
         <a href="courses_page.php#top">Courses</a>
         <a href="favorites.php#top">Favorites</a>
         <a href="cart.php#top">Enroll</a>
         <div class="topnav-right">
-          <a href="logout.php">Logout</a>
+          <a href="logout.php#top">Logout</a>
         </div>
     </div>
   </div>
