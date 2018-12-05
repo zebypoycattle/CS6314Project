@@ -118,10 +118,10 @@ $result = mysqli_query($conn, $sql);
 
 if($accountType == 'student')
 {
-  echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Cart</td><td>Remove From Favorites</td></tr>";
+  echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td><td>Add To Cart</td><td>Remove From Favorites</td></tr>";
 }
 else {
-   echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Day</td><td>Time</td><td>Location</td><td>Textbook</td><td>Fill</td></tr>";
+   echo "<table class='table table-striped'><tr><td>Department</td><td>Course Number</td><td>Section Number</td><td>Class Name</td><td>Professor</td><td>Schedule</td><td>Location</td><td>Textbook</td><td>Fill</td></tr>";
 }
 
 while($row = mysqli_fetch_array($result))
@@ -129,7 +129,7 @@ while($row = mysqli_fetch_array($result))
   $CID = $row["CID"];
   $Src = $row["Src"];
 
-	echo "<tr><td>". $row["DName"]."</td><td>".$row["CNumber"]."</td><td>".$row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Day"]."</td><td>".$row["Time"]. "</td><td>". $row["Location"]. "</td>";
+	echo "<tr><td>". $row["DName"]."</td><td>".$row["CNumber"]."</td><td>".$row["Section"] . "</td><td>". $row["CName"].  "</td><td>". $row["FName"]. " ". $row["LName"] . "</td><td>". $row["Day"]." ".$row["Time"]. "</td><td>". $row["Location"]. "</td>";
 
    if($row['Src'] == 'None' || $row['Src']== '')
           {
