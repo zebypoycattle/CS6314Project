@@ -38,7 +38,6 @@ session_start();
 
           xmlhttp.open("GET",http,true);
           xmlhttp.send();
-          window.reload();
         }
         function unenroll(CID) {
           if (window.XMLHttpRequest)
@@ -60,7 +59,7 @@ session_start();
               }
           };
           var http = "unenroll.php?CID="+CID;
-          xmlhttp.open("GET",http,true);
+          xmlhttp.open("GET",http,false);
           xmlhttp.send();
           showData();
         }
@@ -109,7 +108,7 @@ session_start();
         <?php
 
           if($accountType!= 'student') {
-            echo  "<li><a href='create_course.html'>Click here to add new courses or register new accounts.</a></li>";
+            echo  "<li><a href='create.html'>Click here to add new courses or register new accounts.</a></li>";
             echo  "<li>Click on the History tab to see all previous coursework.</li>";
             echo  "<li>Click on the Courses tab to search, edit, and delete courses.</li>";
             echo  "<li>Click on the Favorites tab to see courses currently favorited by students.</li>";

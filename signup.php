@@ -57,7 +57,7 @@ mysqli_close();
 $message = "Account successfully created.";
     echo "<SCRIPT type='text/javascript'>
         alert('$message');
-        window.location.replace(\"create_course.html\");
+        window.location.replace(\"create.html\");
     </SCRIPT>";   
 
 

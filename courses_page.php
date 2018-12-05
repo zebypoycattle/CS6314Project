@@ -13,7 +13,8 @@ else
   $SID = $_SESSION['SID'];
 }
 
-$name = $_GET['name'];
+
+$name= $_GET['name'];
 $section = $_GET['section'];
 $level = $_GET['level'];
 $location = $_GET['location'];
@@ -134,11 +135,11 @@ $page = $_GET['page'];
 
     <div class="field-wrap">
       <label for="class_name">Class Name </label>
-      <input type = "text" id = "name_select" name = "name" value = <?php echo $name;?>>
+      <input type = "text" id = "name_select" name = "name" value = "<?php echo $name;?>"/>
     </div>
     <div class="field-wrap">
       <label for="class_section">Class Number </label>
-      <input type = "text" id = "section_select" name = "section" value = <?php echo $section;?>>
+      <input type = "text" id = "section_select" name = "section" value = "<?php echo $section;?>"/>
     </div>
 
     <div class="field-wrap">

@@ -63,7 +63,7 @@
 
     var http = "add_to_cart.php?CID="+CID;
 
-    xmlhttp.open("GET",http,true);
+    xmlhttp.open("GET",http,false);
     xmlhttp.send();
 
     showData();
@@ -94,7 +94,7 @@
 
     var http = "remove_from_favorites.php?CID="+CID;
 
-    xmlhttp.open("GET",http,true);
+    xmlhttp.open("GET",http,false);
     xmlhttp.send();
 
     showData();

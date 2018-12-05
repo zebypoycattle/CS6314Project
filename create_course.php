@@ -31,7 +31,7 @@ $conn = mysqli_connect(
 if (!$conn){
   echo "<SCRIPT type='text/javascript'>
       alert('Connection Failed');
-      window.location.replace('create_course.html');
+      window.location.replace('create.html');
   </SCRIPT>";
 	exit();
 }
@@ -56,7 +56,7 @@ if($rowcount != 0)
 {
   echo "<SCRIPT type='text/javascript'>
       alert('Error: This professor is already teaching a course at this day and time');
-      window.location.replace('create_course.html');
+      window.location.replace('create.html');
   </SCRIPT>";
   exit();
 }
@@ -78,7 +78,7 @@ if($rowcount != 0)
 {
   echo "<SCRIPT type='text/javascript'>
       alert('Error: This course and section already exist');
-      window.location.replace('create_course.html');
+      window.location.replace('create.html');
   </SCRIPT>";
   exit();
 }
@@ -284,6 +284,6 @@ else if ($updateFlag == 1)
 mysqli_close();
 echo "<SCRIPT type='text/javascript'>
     alert('$message');
-    window.location.replace('create_course.html');
+    window.location.replace('create.html');
 </SCRIPT>";
 ?>
